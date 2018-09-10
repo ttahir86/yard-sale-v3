@@ -1,0 +1,7 @@
+{
+  "name": "yard-sale-v3",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
