@@ -1,0 +1,12 @@
+<ion-slides (ionSlideDidChange)="slideChanged()">
+  <ion-slide *ngFor="let sale of sales">
+    <ion-card>
+      <ion-card-header>
+        {{sale.title}}
+      </ion-card-header>
+      <ion-card-content>
+        {{sale.distance}}
+      </ion-card-content>
+    </ion-card>
+  </ion-slide>
+</ion-slides>
