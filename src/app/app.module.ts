@@ -17,21 +17,29 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { IonicStorageModule } from '@ionic/storage';
+
+
 import { SalesServiceProvider } from '../providers/sales-service/sales-service';
+import { UserServiceProvider } from '../providers/user-service/user-service';
+import { CreateWhaleSalePage } from '../pages/create-whale-sale/create-whale-sale';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
+    CreateWhaleSalePage,
     MapComponent,
-    SaleCardsComponent
+    SaleCardsComponent,
+    
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyDZGWzxjVpZN_eSlRXSoh-iVY_6tAp15uk' }),
+    IonicStorageModule.forRoot()
     
   ],
   bootstrap: [IonicApp],
@@ -45,7 +53,8 @@ import { SalesServiceProvider } from '../providers/sales-service/sales-service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation,
-    SalesServiceProvider
+    SalesServiceProvider,
+    UserServiceProvider
   ]
 })
 export class AppModule {}

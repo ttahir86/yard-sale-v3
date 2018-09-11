@@ -1,26 +1,52 @@
-<!-- Generated template for the MapComponent component -->
-
-<agm-map (mapReady)="onMapReady($event)" style="width:100%; height: 100%" [latitude]="mapCenter.lat" [longitude]="mapCenter.lng"
-  [zoom]="11">
 
 
-  <agm-marker [latitude]="mapCenter.lat" [longitude]="mapCenter.lng" [animation]="1"></agm-marker>
-
-
-  <div *ngIf="loadMarkerSet===true">
-    <agm-marker *ngFor="let sale of sales" [latitude]="sale.lat" [longitude]="sale.lng" [animation]="2"></agm-marker>
-  </div>
-
-
-  <div *ngIf="loadMarkerSet!=true">
-    <agm-marker *ngFor="let sale of sales" [latitude]="sale.lat" [longitude]="sale.lng" [animation]="2"></agm-marker>
-  </div>
-
-
+<!-- 
   
+  Google maps template with custom bindings.  
 
+-->
+<agm-map 
+  (mapReady)  = "onMapReady($event)" 
+  style       = "width:100%; height: 100%" 
+  [latitude]  = "mapCenter.lat" 
+  [longitude] = "mapCenter.lng"
+  [zoom]      = "11">
 
-    <agm-circle [latitude]="mapCenter.lat" [longitude]="mapCenter.lng" [circleDraggable]="false" [editable]="false" [fillColor]="'#c2d5f9'"
-      [radius]="radius"></agm-circle>
+  <!-- center map on users location-->
+  <agm-marker  *ngFor="let sale of usersale"
+    [latitude]  = "sale.lat" 
+    [longitude] = "sale.lng" 
+    [animation] = "1"
+    [iconUrl]   = "iconuser">
+  </agm-marker>
+
+  <!-- this is a hack to update the markers after the map has been painted.-->
+  <div *ngIf="loadMarkerSet === true">
+    <agm-marker *ngFor="let sale of sales" 
+      [latitude]  = "sale.lat" 
+      [longitude] = "sale.lng" 
+      [animation] = "2" 
+      [iconUrl]   = "icons">
+      <!-- <agm-info-window [disableAutoPan]="false">
+        <strong>{{sale.distance}}</strong>
+      </agm-info-window> -->
+    </agm-marker>
+  </div>
+  <div *ngIf="loadMarkerSet != true">
+    <agm-marker *ngFor="let sale of sales" 
+      [latitude]  = "sale.lat" 
+      [longitude] = "sale.lng" 
+      [animation] = "2" 
+      [iconUrl]   = "icons"></agm-marker>
+  </div>
+
+  <agm-circle 
+    [latitude]        = "mapCenter.lat" 
+    [longitude]       = "mapCenter.lng" 
+    [circleDraggable] = "false" 
+    [editable]        = "false" 
+    [fillColor]       = "'#c2d5f9'"
+    [radius]          = "radius">
+  </agm-circle>
 
 </agm-map>

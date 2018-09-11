@@ -7,17 +7,23 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-    <map *ngIf="bSalesLoaded" [mapCenter]="mapCenter" [sales]="sales" [loadMarkerSet]="loadMarkerSet" [circleRadius]="circleRadius" (onLoadMapEvent)="onMapReady($event)"
-      ></map>
+<ion-content >
+    <map *ngIf="bSalesLoaded && bLoadAll" 
+    [mapCenter]="mapCenter" 
+    [sales]="sales" 
+    [usersale]="usersale"
+    [loadMarkerSet]="loadMarkerSet" 
+    [circleRadius]="circleRadius" 
+    (onLoadMapEvent)="onMapReady($event)"
+    >
+  </map>
 
-  <ion-fab top left right *ngIf="bSalesLoaded && bHasMapLoaded!=false">
-      <sale-cards [sales]="sales" [map]="gmap"></sale-cards>
-
+  <ion-fab top left right *ngIf="bSalesLoaded && bHasMapLoaded != false && bLoadAll">
+      <sale-cards [sales]="sales"  [usersale]="usersale" [map]="gmap"></sale-cards>
   </ion-fab>
 
-  <ion-fab bottom center>
-    <button (click)="toggleSales()" ion-fab><ion-icon name="add"></ion-icon></button>
+  <ion-fab  bottom left>
+    <button (click)="addPin()" ion-fab><ion-icon name="add"></ion-icon></button>
   </ion-fab>
   
 </ion-content>

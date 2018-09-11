@@ -2,6 +2,7 @@ import { SaleCardsComponent } from './../sale-cards/sale-cards';
 import { GoogleMapsAPIWrapper } from '@agm/core';
 import { GoogleMap, Marker, MarkerOptions, MapOptions, InfoWindow, Polyline } from "@agm/core/services/google-maps-types";
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { ISale } from '../../providers/sales-service/sales-service';
 /**
  * Generated class for the MapComponent component.
  *
@@ -13,26 +14,55 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
   templateUrl: 'map.html'
 })
 export class MapComponent implements OnInit {
-  sales2: any = [{ distance: 5.79, lat: 40.20304, lng: -74.67599, title: '' }];
  
   @Input() mapCenter: {lat: number, lng: number};
   @Input() sales: {title: string, distance: number, lat: number, lng: number}[];
+  @Input() usersale: {title: string, distance: number, lat: number, lng: number} = {title: '', distance: 0.0, lat: 0, lng: 0};
   @Input() circleRadius: number;
   @Input() loadMarkerSet: boolean;
   @Output() onLoadMapEvent: EventEmitter<any> = new EventEmitter<any>();
   gmap: GoogleMapsAPIWrapper;
   radius: number;
+  icons: any =
+    
+      {  
+        url: './assets/imgs/yard-sale-pin.gif',
+        scaledSize: {
+        height: 40,
+        width: 40},
+      }
 
+      iconuser: any =
+    
+      {  
+        url: './assets/imgs/yard-sale-pin.gif',
+        scaledSize: {
+        height: 45,
+        width: 45},
+      }
+
+      iconWhale: any =
+    
+      {  
+        url: './assets/imgs/sale-sign.png',
+        scaledSize: {
+        height: 40,
+        width: 40},
+      }
+      
+      
 
   
   constructor() {
     console.log('Hello MapComponent Component');
   }
 
-  ngOnInit() {
-    this.sales2 = [{ distance: 5.79, lat: 40.20304, lng: -74.67599, title: '' }];
-    this.radius = (1609.34 * this.circleRadius)
 
+
+  ngOnInit() {
+    this.radius = (1609.34 * this.circleRadius)
+    console.log('USERSALE IN MAP.TS')
+    console.log(this.usersale)
   }
   protected onMapReady(map:GoogleMapsAPIWrapper) {
     this.gmap = map;
@@ -40,7 +70,7 @@ export class MapComponent implements OnInit {
   }
 
 
-  public centerMap(sale) {
+  public centerMap(sale: ISale) {
     if (this.gmap)
       this.gmap.panTo({ lat: sale.lat, lng: sale.lng });
   }

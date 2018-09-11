@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 
 export interface ISale{
   title           : string;
-  description     ?: string;
-  username        ?: string;
+  distance        : number;
   lat             : number;
   lng             : number;
+  description     ?: string;
+  username        ?: string;
   startTime       ?: string;
   endTime         ?: string;
+  image           ?: string;
 
 }
 const URL_FIND_SALES = "https://talaltahir.com/local-messages-api/find-sales.php";
@@ -22,39 +24,41 @@ export class SalesServiceProvider {
   }
 
   getSales(location: {lat: number, lng:number}, milesToSearch: number ){
-   
     let postData = JSON.stringify
       (
-      {
-        lat: location.lat,
-        lng: location.lng,
-        maxDistance: milesToSearch,
-      }
+        {
+          lat: location.lat,
+          lng: location.lng,
+          maxDistance: milesToSearch,
+        }
       );
-    console.log("location");
-      console.log(location);
+
     return this.http.post(URL_FIND_SALES, postData);
   }
 
-  getSalesCallBack(data){
+  getSalesCallBack(data, username){
     let closestSales;
     let sales = [];
-    console.log('getSalesCallBack start')
-    console.log(data)
+    let usersale = []
+
     try {
-      console.log(data["_body"]);
       closestSales = JSON.parse(data["_body"]);
     } catch (error) {
       console.log(error);
+      console.log(data);
     }
-
+    console.log('CLOSESTSALES')
+    console.log(closestSales);
     for (let i in closestSales) {
-
       let d = Number(closestSales[i].distance).toFixed(2);
-      sales.push({ title: closestSales[i].title, distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });
-      console.log(sales);
+      if(closestSales[i].username === username ){
+        usersale.push({ title: closestSales[i].title, distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });
+      }else{
+        sales.push({ title: closestSales[i].title, distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });
+      }
+      
     }
-    return sales;
+    return {sales: sales, usersale: usersale}
   }
 
 
