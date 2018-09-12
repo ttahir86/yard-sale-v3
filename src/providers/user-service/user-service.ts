@@ -22,8 +22,8 @@ export class UserServiceProvider {
   }
 
   getUserLocation(){
-    let GPSoptions = { enableHighAccuracy: true, maximumAge: 0 };
-    return this.geo.getCurrentPosition(GPSoptions)
+    // let GPSoptions = { enableHighAccuracy: true, maximumAge: 0 };
+    return this.geo.getCurrentPosition()
   }
 
   getUsername(){

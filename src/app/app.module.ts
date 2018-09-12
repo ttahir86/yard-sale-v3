@@ -20,6 +20,9 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { IonicStorageModule } from '@ionic/storage';
 
 
+import { IonPullupModule } from 'ionic-pullup';
+
+
 import { SalesServiceProvider } from '../providers/sales-service/sales-service';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { CreateWhaleSalePage } from '../pages/create-whale-sale/create-whale-sale';
@@ -29,24 +32,27 @@ import { CreateWhaleSalePage } from '../pages/create-whale-sale/create-whale-sal
     MyApp,
     HomePage,
     ListPage,
-    CreateWhaleSalePage,
     MapComponent,
     SaleCardsComponent,
+    CreateWhaleSalePage
     
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    AgmCoreModule.forRoot({ apiKey: 'AIzaSyDZGWzxjVpZN_eSlRXSoh-iVY_6tAp15uk' }),
-    IonicStorageModule.forRoot()
+    AgmCoreModule.forRoot({ apiKey: '' }),
+    IonicStorageModule.forRoot(),
+    IonPullupModule
     
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    CreateWhaleSalePage,
+    
   ],
   providers: [
     StatusBar,
@@ -56,5 +62,6 @@ import { CreateWhaleSalePage } from '../pages/create-whale-sale/create-whale-sal
     SalesServiceProvider,
     UserServiceProvider
   ]
+
 })
 export class AppModule {}

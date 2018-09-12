@@ -10,7 +10,9 @@
   style       = "width:100%; height: 100%" 
   [latitude]  = "mapCenter.lat" 
   [longitude] = "mapCenter.lng"
-  [zoom]      = "11">
+  [zoom]      = "11"
+  [streetViewControl]="false" 
+  [zoomControl]="false">
 
   <!-- center map on users location-->
   <agm-marker  *ngFor="let sale of usersale"

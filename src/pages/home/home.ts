@@ -1,8 +1,11 @@
 import { GoogleMapsAPIWrapper } from '@agm/core';
 import { SalesServiceProvider, ISale } from './../../providers/sales-service/sales-service';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { IonPullUpFooterState } from 'ionic-pullup';
+import { CreateWhaleSalePage } from '../create-whale-sale/create-whale-sale';
+
 
 @Component({
   selector: 'page-home',
@@ -19,6 +22,8 @@ export class HomePage {
   circleRadius: number; // in miles
   gmap: GoogleMapsAPIWrapper;
 
+  allSales : {usersale: ISale[], sales: ISale[]};
+
   username: string;
   usersale: ISale[];
   bFindUserNameCheck  : boolean = false;
@@ -26,10 +31,14 @@ export class HomePage {
 
   bLoadAll:boolean = false;
 
+  footerState: IonPullUpFooterState;
+
+
   constructor(
   public navCtrl: NavController, 
   private salesService: SalesServiceProvider,
-  private userService: UserServiceProvider) 
+  private userService: UserServiceProvider,
+  private modalCtrl: ModalController) 
   { 
     this.mapCenter = {lat: -74.01, lng: 40.00};
   }
@@ -52,7 +61,6 @@ export class HomePage {
       }else{
         this.username = name;
         this.bFindUserNameCheck = true;
-        // this.findActiveSalesForUser(this.username)
       }
 
       console.log(this.username);
@@ -78,31 +86,6 @@ export class HomePage {
     });
   }
 
-
-  // findActiveSalesForUser(username){
-  //   this.userService.getSaleByUsername(username).subscribe(data => {
-  //     try {
-  //       this.usersale = this.userService.getSaleByUsernameCallBack(data);
-  //       console.log('USER SALE: ==> ')
-  //       console.log(this.usersale)
-  //       this.bFindUserSaleCheck = true;
-  //       this.sales.push({ distance: 0.00, lat: (Number)(this.usersale.lat), lng: (Number)(this.usersale.lng), title: this.usersale.title, username: this.usersale.username });
-  //       // this.addPin();
-  //       this.bLoadAll = true;
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-
-  //   }, error => {
-  //     console.log(error);
-  //   });
-  // }
-
-  onMapReady(map: GoogleMapsAPIWrapper){
-    this.gmap = map;
-    this.bHasMapLoaded = true;
-  }
-
   getUserLocation() {
     this.userService.getUserLocation().then((position) => {
         this.geolocationCallBack(position)
@@ -123,7 +106,7 @@ export class HomePage {
     this.user.lat = pos.coords.latitude
     this.user.lng = pos.coords.longitude
     
-
+    console.log(this.mapCenter)
     this.getSales();
   }
 
@@ -131,12 +114,12 @@ export class HomePage {
     console.log('getSales2 start')
     let location = { lat: this.user.lat, lng: this.user.lng}
     this.salesService.getSales(location, this.circleRadius).subscribe(data => {
-      let allsales = this.salesService.getSalesCallBack(data, this.username);
-      this.sales = allsales.sales;
-      this.usersale = allsales.usersale;
+      this.allSales = this.salesService.getSalesCallBack(data, this.username);
+      this.sales = this.allSales.sales;
+      this.usersale = this.allSales.usersale;
 
       console.log('ALLSALES')
-      console.log(allsales)
+      console.log(this.allSales)
 
       console.log(this.sales)
       console.log(this.usersale)
@@ -152,8 +135,34 @@ export class HomePage {
   addPin(){
     this.loadMarkerSet = !this.loadMarkerSet;
     console.log(this.username)
+  }
 
+  onMapReady(map: GoogleMapsAPIWrapper){
+    this.gmap = map;
+    this.bHasMapLoaded = true;
+  }
+
+
+  openModal() {
     
+    let modalPage = this.modalCtrl.create(CreateWhaleSalePage);
+   
+    modalPage.present();
+  }
+
+
+
+
+  footerExpanded() {
+    console.log('Footer expanded!');
+  }
+
+  footerCollapsed() {
+    console.log('Footer collapsed!');
+  }
+
+  toggleFooter() {
+    this.footerState = this.footerState == IonPullUpFooterState.Collapsed ? IonPullUpFooterState.Expanded : IonPullUpFooterState.Collapsed;
   }
 
 

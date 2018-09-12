@@ -1,22 +1,47 @@
 <ion-slides (ionSlideDidChange)="slideChanged()">
+
+
   <ion-slide *ngFor="let sale of usersale">
     <ion-card>
       <ion-card-header>
         {{sale.title}}
       </ion-card-header>
-      <ion-card-content>
+      <ion-card-content style="background-color: black">
         {{sale.distance}}
       </ion-card-content>
     </ion-card>
   </ion-slide>
+
   <ion-slide *ngFor="let sale of sales">
     <ion-card>
-      <ion-card-header>
-        {{sale.title}}
-      </ion-card-header>
-      <ion-card-content>
-        {{sale.distance}}
-      </ion-card-content>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <img class="circle-pic" src="../../assets/imgs/yardsale-default.png">
+        </ion-avatar>
+        <ion-row>
+          <ion-col>
+            <h2>{{sale.title}}</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row >
+          <ion-col>
+            <small> 9:00 am - 5:00 pm</small>
+          </ion-col>
+          <ion-col>
+            <div  text-right>
+              <span class="text-mileage">{{sale.distance}} mi.</span>
+            </div>
+          </ion-col>
+
+        </ion-row>
+      </ion-item>
+
+
+
+
+
+
     </ion-card>
   </ion-slide>
 </ion-slides>
