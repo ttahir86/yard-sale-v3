@@ -1,4 +1,3 @@
-import { ISale } from './../../providers/sales-service/sales-service';
 import { SaleCardsComponent } from './../sale-cards/sale-cards';
 import { GoogleMapsAPIWrapper } from '@agm/core';
 import { GoogleMap, Marker, MarkerOptions, MapOptions, InfoWindow, Polyline } from "@agm/core/services/google-maps-types";
