@@ -30,8 +30,11 @@ export class HomePage {
   bFindUserSaleCheck  : boolean = false;
 
   bLoadAll:boolean = false;
+  bLocationHasLoaded: boolean = false;
 
   footerState: IonPullUpFooterState;
+
+  bDoesUserHaveActiveSale: boolean = false;
 
 
   constructor(
@@ -45,6 +48,7 @@ export class HomePage {
 
 
   ionViewDidLoad(){
+    
     this.getUserLocation()
     this.circleRadius = 6;
     this.login();
@@ -60,6 +64,7 @@ export class HomePage {
         this.createUser();
       }else{
         this.username = name;
+        this.user.username = name;
         this.bFindUserNameCheck = true;
       }
 
@@ -76,6 +81,7 @@ export class HomePage {
           this.username = username
           console.log("this.username ===> " + this.username);
           this.bFindUserNameCheck = true;
+          this.user.username = username;
         }
         
       } catch (error) {
@@ -107,6 +113,7 @@ export class HomePage {
     this.user.lng = pos.coords.longitude
     
     console.log(this.mapCenter)
+    this.bLocationHasLoaded = true;
     this.getSales();
   }
 
@@ -116,7 +123,11 @@ export class HomePage {
     this.salesService.getSales(location, this.circleRadius).subscribe(data => {
       this.allSales = this.salesService.getSalesCallBack(data, this.username);
       this.sales = this.allSales.sales;
-      this.usersale = this.allSales.usersale;
+      if (this.allSales.usersale.length > 0){
+        this.usersale = this.allSales.usersale;
+
+        this.bDoesUserHaveActiveSale = true;
+      }
 
       console.log('ALLSALES')
       console.log(this.allSales)
@@ -144,9 +155,25 @@ export class HomePage {
 
 
   openModal() {
-    
-    let modalPage = this.modalCtrl.create(CreateWhaleSalePage);
-   
+    console.log(this.user)
+    let modalPage = this.modalCtrl.create(CreateWhaleSalePage, {user: this.user});
+    modalPage.onDidDismiss(returndata => {
+
+      try {
+        console.log('RETURN DATA FROM MODAL: ')
+        console.log(returndata);
+        if (returndata == undefined){
+
+        }else{
+          this.addPin();
+          this.usersale = [returndata];
+        }
+      
+
+      } catch (error) {
+        console.log(error)
+      }
+    });
     modalPage.present();
   }
 

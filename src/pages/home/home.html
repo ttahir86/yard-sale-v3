@@ -6,6 +6,7 @@
           <ion-icon name="menu" class="icon-menu"></ion-icon>
         </button>
       </ion-row>
+      
         <!-- <ion-title ><span class="header" >whalesale</span></ion-title> -->
 
     <!-- <ion-title ><span class="header">Whale Sale</span></ion-title> -->
@@ -16,7 +17,7 @@
    
    
 
-    <map *ngIf="bSalesLoaded && bLoadAll" 
+    <map *ngIf="bSalesLoaded || bLocationHasLoaded" 
     [mapCenter]="mapCenter" 
     [sales]="sales" 
     [usersale]="usersale"
@@ -32,7 +33,7 @@
         </sale-cards>
   </ion-fab>
 
-  <ion-fab bottom left right padding  class="font-quicksand">
+  <ion-fab bottom left right padding  class="font-quicksand" *ngIf="!bDoesUserHaveActiveSale && bLoadAll">
     <button 
       class="btn-create-sale" 
       (click)="openModal()"
@@ -44,6 +45,12 @@
     </button>
   </ion-fab>
 
+  <ion-fab bottom left right padding class="font-quicksand" *ngIf="bDoesUserHaveActiveSale && bLoadAll">
+    <button class="btn-create-sale" (click)="openModal()" color="fabbtn" ion-button full round>
+      <strong><label>Edit My Whalesale</label></strong>
+    </button>
+  </ion-fab>
+
 
   
   <!--#113b7f-->
@@ -52,16 +59,17 @@
         
       </ion-toolbar>
     </ion-footer>
-
+<!--
     <ion-pullup style="z-index: 100"(onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" [(state)]="footerState">
         <ion-pullup-tab  (tap)="toggleFooter()" style="background-color: #222">
           <ion-icon name="arrow-up" *ngIf="footerState == 0"></ion-icon><ion-icon name="arrow-down" *ngIf="footerState == 1"></ion-icon>
         </ion-pullup-tab>
-        <!-- <ion-toolbar color="primary" (tap)="toggleFooter()">
+        <ion-toolbar color="primary" (tap)="toggleFooter()">
           <ion-title>Footer</ion-title>
-        </ion-toolbar> -->
+        </ion-toolbar> 
         <ion-content>
         <img src="../../assets/imgs/WHALE.png">
         </ion-content>
       </ion-pullup>
+      -->
 </ion-content>

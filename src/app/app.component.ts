@@ -1,3 +1,4 @@
+import { CreateWhaleSalePage } from './../pages/create-whale-sale/create-whale-sale';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -40,5 +41,6 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+    
   }
 }

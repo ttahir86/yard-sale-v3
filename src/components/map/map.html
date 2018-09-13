@@ -15,12 +15,23 @@
   [zoomControl]="false">
 
   <!-- center map on users location-->
-  <agm-marker  *ngFor="let sale of usersale"
-    [latitude]  = "sale.lat" 
-    [longitude] = "sale.lng" 
-    [animation] = "1"
-    [iconUrl]   = "iconuser">
-  </agm-marker>
+  <div *ngIf="loadMarkerSet === true">
+    <agm-marker  *ngFor="let sale of usersale"
+      [latitude]  = "sale.lat" 
+      [longitude] = "sale.lng" 
+      [animation] = "1"
+      [iconUrl]   = "iconuser">
+    </agm-marker>
+  </div>
+
+  <div *ngIf="loadMarkerSet === false">
+    <agm-marker *ngFor="let sale of usersale" 
+    [latitude]="sale.lat" 
+    [longitude]="sale.lng"
+     [animation]="1" 
+     [iconUrl]="iconuser">
+    </agm-marker>
+  </div>
 
   <!-- this is a hack to update the markers after the map has been painted.-->
   <div *ngIf="loadMarkerSet === true">

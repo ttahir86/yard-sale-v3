@@ -1,3 +1,4 @@
+import { ISale } from './../../providers/sales-service/sales-service';
 import { SaleCardsComponent } from './../sale-cards/sale-cards';
 import { GoogleMapsAPIWrapper } from '@agm/core';
 import { GoogleMap, Marker, MarkerOptions, MapOptions, InfoWindow, Polyline } from "@agm/core/services/google-maps-types";
@@ -17,7 +18,7 @@ export class MapComponent implements OnInit {
  
   @Input() mapCenter: {lat: number, lng: number};
   @Input() sales: {title: string, distance: number, lat: number, lng: number}[];
-  @Input() usersale: {title: string, distance: number, lat: number, lng: number} = {title: '', distance: 0.0, lat: 0, lng: 0};
+  @Input() usersale: ISale[] = [{title: '', distance: 0.0, lat: 0, lng: 0}];
   @Input() circleRadius: number;
   @Input() loadMarkerSet: boolean;
   @Output() onLoadMapEvent: EventEmitter<any> = new EventEmitter<any>();
@@ -63,6 +64,8 @@ export class MapComponent implements OnInit {
     this.radius = (1609.34 * this.circleRadius)
     console.log('USERSALE IN MAP.TS')
     console.log(this.usersale)
+    console.log(this.sales)
+   
   }
   protected onMapReady(map:GoogleMapsAPIWrapper) {
     this.gmap = map;

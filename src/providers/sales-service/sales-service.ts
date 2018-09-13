@@ -1,3 +1,4 @@
+import { ISale } from './sales-service';
 import { Http } from '../../../node_modules/@angular/http';
 import { Injectable } from '@angular/core';
 
@@ -39,7 +40,7 @@ export class SalesServiceProvider {
   getSalesCallBack(data, username){
     let closestSales;
     let sales = [];
-    let usersale = []
+    let usersale: ISale[] = []
 
     try {
       closestSales = JSON.parse(data["_body"]);
@@ -51,7 +52,10 @@ export class SalesServiceProvider {
     console.log(closestSales);
     for (let i in closestSales) {
       let d = Number(closestSales[i].distance).toFixed(2);
-      if(closestSales[i].username === username ){
+      console.log("USERNAME INSIDE OF SERVCE THAT IS PASSED: " + username)
+      console.log("closestSales[i].username: " + closestSales[i].username)
+      if(closestSales[i].username == username ){
+        console.log("THEY ARE EQUAL!")
         usersale.push({ title: closestSales[i].title, distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });
       }else{
         sales.push({ title: closestSales[i].title, distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });

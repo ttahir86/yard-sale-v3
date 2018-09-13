@@ -1,3 +1,86 @@
 page-create-whale-sale {
+    .my-navbar{
+
+    }
+    .header{
+        // font-family: 'Gamja Flower', cursive;
+        // font-family: 'Merriweather', serif;
+        // font-family: 'Ruslan Display', cursive;
+        // font-family: 'Fira Sans', sans-serif;
+        // font-family: 'Oxygen', sans-serif;
+        font-family: 'Quicksand', sans-serif;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    #close{
+        font-size: 35px;
+    }
+
+
+    #opt{
+        font-size: 10px;
+        color: grey;
+    }
+
+    .mytitle{
+        font-size: 8px;   
+    }
+
+    .masters {
+        background-color: #fffdfd;
+      }
+
+
+    .card-header{
+        background-color: #fffdfd;
+        color: black;   
+        
+
+    }
+
+    .date-cols{
+        font-size: 22px;
+    }
+    .day-cols{
+        font-size: 15px;
+        opacity: 0.5;
+    }
+    
+    .date-block{
+       background-color: #fffdfd;
+       font-weight: normal;
+  
+    }
+
+
+
+    .custom-icon{
+        font-size: 20px;
+        color: #3f6093;
+        text-align: left;
+        width: 25px;
+    }
+
+    .question-header{
+        text-align: center; 
+        margin: 0 auto; 
+        width: 100%;
+        font-weight: bold;
+
+        margin: 20px 0px;
+        
+    }
+
+    .btn-start-sale{
+        padding: 30px;
+        margin: 0 0 5px 0
+    }
+
+      .font-quicksand{
+        font-family: 'Quicksand', sans-serif;
+        font-weight: bold;
+
+    }
 
 }
