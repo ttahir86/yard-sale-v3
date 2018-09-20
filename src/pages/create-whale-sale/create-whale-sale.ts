@@ -117,7 +117,7 @@ export class CreateWhaleSalePage {
 
 
   private closeModal() {
-
+    this.postYardSale['distance'] = 0.0;
     this.viewCtrl.dismiss(this.postYardSaleData);
   }
 
@@ -225,7 +225,8 @@ export class CreateWhaleSalePage {
         "lng": this.user.lng,
         "startDate": this.selectedDate,
         "startTime": this.selectedTime,
-        "username": this.user.username
+        "username": this.user.username,
+        "title" : "Whalesale!"
       }
       console.log('POST DATA FOR CREATE USER: ')
       console.log(this.user)

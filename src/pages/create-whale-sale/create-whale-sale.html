@@ -8,7 +8,7 @@
 
 
   <ion-navbar color="primaryCustom">
-    <ion-title class="font-quicksand">Create WhaleSale</ion-title>
+    <ion-title class="font-quicksand">Create Whalesale</ion-title>
 
     <ion-buttons end>
       <button ion-button clear (click)="closeModal()">
@@ -22,11 +22,7 @@
 </ion-header>
 
 
-<ion-content padding class="masters">
-  <!-- 
-    <ion-avatar  >
-        <img src="assets/imgs/whale.png" style="margin: auto; padding: 0px;" width="15%">
-      </ion-avatar> -->
+<ion-content class="masters">
 
   <div>
     <!-- radio buttons -->
@@ -55,17 +51,7 @@
             </ion-col>
           </ion-row>
 
-          <!-- image -->
-          <!-- <ion-label>Add Image - (optional)</ion-label>      
-          <ion-row>      
-            <ion-col>
-              <ion-item text-center>
-                <div style="border: 2px dashed black; display: inline-block;">
-                  <ion-img  width="50" height="50" src="assets/imgs/image-placeholder.png"></ion-img>
-                </div>        
-              </ion-item>
-            </ion-col>
-          </ion-row> -->
+
 
         </ion-card>
       </div>
@@ -85,8 +71,8 @@
             </ion-label>
             <ion-label [id]="i" class="day-cols" (click)="onDateClick(i)" [style.font-weight]="selectedDateId === i ? 'bold' : 'normal'"
               [style.color]="selectedDateId === i ? '#488aff' : 'black'" [style.opacity]="selectedDateId === i ? '0.8' : '0.5'">
-              {{date['day']}}</ion-label>
-
+              {{date['day']}}
+            </ion-label>
           </ion-col>
         </ion-row>
       </div>
@@ -104,8 +90,8 @@
             <ion-col>
               <ion-item>
                 <ion-label color="black">Start Time</ion-label>
-                <ion-datetime #datePicker (ionChange)="onTimePickerChange()" [(ngModel)]="selectedTime" (ionCancel)="myDate=undefined"
-                  displayFormat="h:mm A" [(ngModel)]="startTimeModel" style="color: #488aff; font-weight: bold;"></ion-datetime>
+                <ion-datetime #datePicker (ionChange)="onTimePickerChange()" [(ngModel)]="selectedTime" (ionCancel)="myDate=undefined" displayFormat="h:mm A"
+                  [(ngModel)]="startTimeModel" style="color: #488aff; font-weight: bold;"></ion-datetime>
               </ion-item>
             </ion-col>
             <!-- <ion-col>
@@ -122,15 +108,11 @@
 </ion-content>
 
 
-  <ion-fab bottom left right padding class="font-quicksand">
-    <button class="btn-start-sale" (click)="createYardSale()" color="fabbtn" ion-button full round>
-      <strong><label>Start My Whalesale</label></strong>
-    </button>
-  </ion-fab>
+<ion-fab bottom left right padding class="font-quicksand">
+  <button class="btnCustom" (click)="createYardSale()" color="fabbtn" ion-button full round>
+    <strong><label>Start My Whalesale</label></strong>
+  </button>
+</ion-fab>
 
-<!-- footer button -->
-  <ion-footer style="border-top: 5px solid #222;">
-    <ion-toolbar color="light" style="padding: 30px;">
-  
-    </ion-toolbar>
-  </ion-footer>
+
+<footer></footer>

@@ -2,7 +2,7 @@ import { SaleCardsComponent } from './../sale-cards/sale-cards';
 import { GoogleMapsAPIWrapper } from '@agm/core';
 import { GoogleMap, Marker, MarkerOptions, MapOptions, InfoWindow, Polyline } from "@agm/core/services/google-maps-types";
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
-import { ISale } from '../../providers/sales-service/sales-service';
+import { ISale } from '../../providers/sales-service/sales.model';
 /**
  * Generated class for the MapComponent component.
  *
@@ -17,7 +17,7 @@ export class MapComponent implements OnInit {
  
   @Input() mapCenter: {lat: number, lng: number};
   @Input() sales: {title: string, distance: number, lat: number, lng: number}[];
-  @Input() usersale: ISale[] = [{title: '', distance: 0.0, lat: 0, lng: 0}];
+  @Input() usersale: ISale[] = [{owner: '', title: '', distance: 0.0, lat: 0, lng: 0}];
   @Input() circleRadius: number;
   @Input() loadMarkerSet: boolean;
   @Output() onLoadMapEvent: EventEmitter<any> = new EventEmitter<any>();

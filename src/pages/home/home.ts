@@ -1,10 +1,14 @@
 import { GoogleMapsAPIWrapper } from '@agm/core';
-import { SalesServiceProvider, ISale } from './../../providers/sales-service/sales-service';
+import { SalesServiceProvider } from './../../providers/sales-service/sales-service';
+import { ISale } from './../../providers/sales-service/sales.model';
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { IonPullUpFooterState } from 'ionic-pullup';
 import { CreateWhaleSalePage } from '../create-whale-sale/create-whale-sale';
+import { Storage } from '@ionic/storage';
+import { IntroSlidePage } from '../intro-slide/intro-slide';
+import { EditWhaleSalePage } from '../edit-whale-sale/edit-whale-sale';
 
 
 @Component({
@@ -15,6 +19,7 @@ export class HomePage {
 
   mapCenter: {lat: number, lng: number}
   sales: ISale[] = [];
+  // sales2 : ISale2[] = [];
   user: {username?: string, lat: number, lng: number} = {username: 'anon', lat: -70.00, lng: 40.00}
   bSalesLoaded: boolean = false;
   loadMarkerSet: boolean = true;
@@ -41,17 +46,65 @@ export class HomePage {
   public navCtrl: NavController, 
   private salesService: SalesServiceProvider,
   private userService: UserServiceProvider,
-  private modalCtrl: ModalController) 
+  private modalCtrl: ModalController,
+  private storage: Storage) 
   { 
     this.mapCenter = {lat: -74.01, lng: 40.00};
   }
 
 
   ionViewDidLoad(){
+    // this.storage.remove("newuser").then(() => { })
     
+    this.storage.get('newuser').then((res) => {this.openSlideCallback(res)});
+    // this.storage.remove("newuser").then(() => { })
+    
+
+
+
+
+
     this.getUserLocation()
     this.circleRadius = 6;
     this.login();
+  }
+
+  openSlideCallback(res){
+    console.log(res);
+    if ( res === null){
+      this.openIntroSlides();
+    }
+  }
+
+
+  openIntroSlides() {
+    console.log(this.user)
+    let modalPage = this.modalCtrl.create(IntroSlidePage);
+    // modalPage.onDidDismiss(returndata => {
+
+    //   try {
+    //     console.log('RETURN DATA FROM MODAL: ')
+    //     console.log(returndata);
+    //     if (returndata == undefined){
+
+    //     }else{
+    //       this.addPin();
+    //       this.usersale = [returndata];
+    //       this.bDoesUserHaveActiveSale = true;
+    //     }
+      
+
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // });
+    modalPage.present();
+  }
+
+  editWhaleSale(){
+    console.log(this.user)
+    let modalPage = this.modalCtrl.create(EditWhaleSalePage);
+    modalPage.present();
   }
 
 
@@ -167,6 +220,7 @@ export class HomePage {
         }else{
           this.addPin();
           this.usersale = [returndata];
+          this.bDoesUserHaveActiveSale = true;
         }
       
 
@@ -189,6 +243,7 @@ export class HomePage {
   }
 
   toggleFooter() {
+    
     this.footerState = this.footerState == IonPullUpFooterState.Collapsed ? IonPullUpFooterState.Expanded : IonPullUpFooterState.Collapsed;
   }
 

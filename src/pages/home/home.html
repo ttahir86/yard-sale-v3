@@ -1,75 +1,167 @@
+<!-- home header -->
 <ion-header>
-  
-  <ion-navbar class="my-navbar" color="primaryCustom" text-center>
-    <ion-row class="my-navbar-row">  
-    <button ion-button menuToggle>
-          <ion-icon name="menu" class="icon-menu"></ion-icon>
-        </button>
-      </ion-row>
-      
-        <!-- <ion-title ><span class="header" >whalesale</span></ion-title> -->
-
-    <!-- <ion-title ><span class="header">Whale Sale</span></ion-title> -->
+  <ion-navbar color="primaryCustom" text-center >
+    <ion-item class="primaryCustom-backgroundColor" no-lines>
+      <ion-label>
+        <ion-row>
+          <ion-col col-2>
+            <button item-start ion-button menuToggle>
+              <ion-icon name="menu" class="icon-menu"></ion-icon>
+            </button>
+          </ion-col>
+          <ion-col col-10>
+            <ion-title class="font-quicksand">Whalsesale</ion-title>
+          </ion-col>
+        </ion-row>
+      </ion-label>
+      <ion-toggle (click)="toggleFooter()" (tap)="toggleFooter()" color="toggleColor" class="primaryCustom-backgroundColor" [(ngModel)]="pepperoni">
+      </ion-toggle>
+    </ion-item>
   </ion-navbar>
 </ion-header>
+<!-- home header -->
 
-<ion-content >
-   
-   
 
-    <map *ngIf="bSalesLoaded || bLocationHasLoaded" 
-    [mapCenter]="mapCenter" 
-    [sales]="sales" 
-    [usersale]="usersale"
-    [loadMarkerSet]="loadMarkerSet" 
-    [circleRadius]="circleRadius" 
-    (onLoadMapEvent)="onMapReady($event)"
-    >
+
+
+<ion-content>
+  <map *ngIf="bSalesLoaded || bLocationHasLoaded" [mapCenter]="mapCenter" [sales]="sales" [usersale]="usersale" [loadMarkerSet]="loadMarkerSet"
+    [circleRadius]="circleRadius" (onLoadMapEvent)="onMapReady($event)">
   </map>
 
   <ion-fab top left right edge *ngIf="bSalesLoaded && bHasMapLoaded != false && bLoadAll && !footerState">
-      <sale-cards [sales]="sales" [usersale]="usersale" [map]="gmap">
+    <sale-cards [sales]="sales" [usersale]="usersale" [map]="gmap">
 
-        </sale-cards>
+    </sale-cards>
   </ion-fab>
 
-  <ion-fab bottom left right padding  class="font-quicksand" *ngIf="!bDoesUserHaveActiveSale && bLoadAll">
-    <button 
-      class="btn-create-sale" 
-      (click)="openModal()"
-      color="fabbtn"
-      ion-button  
-      full
-      round>
+  <ion-fab bottom left right padding class="font-quicksand" *ngIf="!bDoesUserHaveActiveSale && bLoadAll">
+    <button class="btnCustom" (click)="openModal()" color="fabbtn" ion-button full round>
       <strong><label>Create Whalesale</label></strong>
     </button>
   </ion-fab>
 
   <ion-fab bottom left right padding class="font-quicksand" *ngIf="bDoesUserHaveActiveSale && bLoadAll">
-    <button class="btn-create-sale" (click)="openModal()" color="fabbtn" ion-button full round>
-      <strong><label>Edit My Whalesale</label></strong>
+    <button class="btnCustom" (click)="editWhaleSale()" color="fabbtn" ion-button full round>
+      <strong><label>Edit My Whalesale&nbsp;</label></strong>
     </button>
   </ion-fab>
 
+  <footer></footer>
 
-  
-  <!--#113b7f-->
-  <ion-footer style="border-top: 5px solid #222;">
-      <ion-toolbar color="light" style="padding: 30px;">
+
+
+  <ion-pullup (onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" [(state)]="footerState">
+    <ion-content >
+      <img *ngIf="sales.length === 0" src="../../assets/imgs/WHALE.png">
+
+      <ion-list>
+        <ion-card *ngFor="let sale of usersale" >
+
+            <ion-item class="card-content">
+                <ion-avatar item-start>
+                  <img class="circle-pic" src="../../assets/imgs/yardsale-default.png">
+                </ion-avatar>
+                <ion-row>
+                  <ion-col>
+                    <h2 >{{sale.title}}</h2>
+                  </ion-col>
+                </ion-row>
+                <ion-row >
+                  <ion-col>
+                    <small class="font-quicksand"> 9:00 am - 5:00 pm</small>
+                  </ion-col>
+                  <ion-col>
+                    <div  text-right>
+                      <span class="text-mileage font-quicksand">{{sale.distance}} mi.</span>
+                    </div>
+                  </ion-col>
         
-      </ion-toolbar>
-    </ion-footer>
-<!--
-    <ion-pullup style="z-index: 100"(onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" [(state)]="footerState">
-        <ion-pullup-tab  (tap)="toggleFooter()" style="background-color: #222">
-          <ion-icon name="arrow-up" *ngIf="footerState == 0"></ion-icon><ion-icon name="arrow-down" *ngIf="footerState == 1"></ion-icon>
-        </ion-pullup-tab>
-        <ion-toolbar color="primary" (tap)="toggleFooter()">
-          <ion-title>Footer</ion-title>
-        </ion-toolbar> 
-        <ion-content>
-        <img src="../../assets/imgs/WHALE.png">
-        </ion-content>
-      </ion-pullup>
-      -->
+                </ion-row>
+              </ion-item>
+        
+          <!-- <ion-item>
+            <ion-avatar item-start>
+              <img src="assets/imgs/yard-sale-pin.gif">
+            </ion-avatar>
+            <h2 class="font-quicksand">{{sale.title}}</h2>
+      
+            <p class="font-quicksand distance">{{sale.distance}} mi.</p>
+          </ion-item> -->
+
+        </ion-card>
+        <!-- <ion-card *ngFor="let sale of sales">
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="assets/imgs/yard-sale-pin.gif">
+            </ion-avatar>
+            <h2 class="font-quicksand">{{sale.title}}</h2>
+            <ion-badge item-end>
+              <ion-icon name="car"></ion-icon>
+            </ion-badge>
+            <p class="font-quicksand distance">{{sale.distance}} mi.</p>
+          </ion-item>
+        </ion-card> -->
+
+        
+            <ion-card *ngFor="let sale of sales; let i = index">
+        
+              <ion-item  *ngIf="i%2 !== 0"  class="card-content">
+                <ion-avatar item-start>
+                  <img class="circle-pic" src="../../assets/imgs/yardsale-default.png">
+                </ion-avatar>
+                <ion-row>
+                  <ion-col>
+                    <h2 class="font-quicksand">{{sale.title}}</h2>
+                  </ion-col>
+                </ion-row>
+                <ion-row >
+                  <ion-col>
+                    <small class="font-quicksand"> 9:00 am - 5:00 pm</small>
+                  </ion-col>
+                  <ion-col>
+                    <div  text-right>
+                      <span class="text-mileage font-quicksand">{{sale.distance}} mi.</span>
+                    </div>
+                  </ion-col>
+        
+                </ion-row>
+              </ion-item>
+
+              <ion-item  *ngIf="i%2 === 0" >
+                  <ion-avatar item-start>
+                    <img class="circle-pic" src="../../assets/imgs/yardsale-default.png">
+                  </ion-avatar>
+                  <ion-row>
+                    <ion-col>
+                      <h2 class="font-quicksand">{{sale.title}}</h2>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row >
+                    <ion-col>
+                      <small class="font-quicksand"> 9:00 am - 5:00 pm</small>
+                    </ion-col>
+                    <ion-col>
+                      <div  text-right>
+                        <span class="text-mileage font-quicksand">{{sale.distance}} mi.</span>
+                      </div>
+                    </ion-col>
+          
+                  </ion-row>
+                </ion-item>
+        
+        
+        
+        
+        
+        
+            </ion-card>
+ 
+
+      </ion-list>
+
+    </ion-content>
+
+  </ion-pullup>
+
 </ion-content>

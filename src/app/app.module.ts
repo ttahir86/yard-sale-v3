@@ -26,6 +26,9 @@ import { IonPullupModule } from 'ionic-pullup';
 import { SalesServiceProvider } from '../providers/sales-service/sales-service';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { CreateWhaleSalePage } from '../pages/create-whale-sale/create-whale-sale';
+import { IntroSlidePage } from '../pages/intro-slide/intro-slide';
+import { FooterComponent } from '../components/footer/footer';
+import { EditWhaleSalePage } from '../pages/edit-whale-sale/edit-whale-sale';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { CreateWhaleSalePage } from '../pages/create-whale-sale/create-whale-sal
     ListPage,
     MapComponent,
     SaleCardsComponent,
-    CreateWhaleSalePage
+    CreateWhaleSalePage,
+    FooterComponent,
+    IntroSlidePage,
+    EditWhaleSalePage
     
   ],
   imports: [
@@ -52,6 +58,8 @@ import { CreateWhaleSalePage } from '../pages/create-whale-sale/create-whale-sal
     HomePage,
     ListPage,
     CreateWhaleSalePage,
+    IntroSlidePage,
+    EditWhaleSalePage
     
   ],
   providers: [

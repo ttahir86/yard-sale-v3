@@ -1,7 +1,7 @@
 import { MapComponent } from './../map/map';
 import { Component, Input, ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
-import { ISale } from '../../providers/sales-service/sales-service'
+import { ISale } from '../../providers/sales-service/sales.model'
 
 /**
  * Generated class for the SaleCardsComponent component.
@@ -31,7 +31,7 @@ export class SaleCardsComponent{
     let currentIndex = this.slides.getActiveIndex();
     console.log("current index: " + currentIndex)
     console.log("sale length: " + this.sales.length)
-    if (this.usersale.length == 0 || this.usersale == []){
+    if (this.usersale == undefined || this.usersale.length == 0 || this.usersale == []){
       console.log('yeah, undefined')
       if (currentIndex >= this.sales.length) {
         currentIndex = this.sales.length - 1

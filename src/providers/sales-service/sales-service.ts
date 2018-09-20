@@ -1,19 +1,22 @@
-import { ISale } from './sales-service';
+// import { ISale } from './sales-service';
 import { Http } from '../../../node_modules/@angular/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ISale } from './sales.model';
 
-export interface ISale{
-  title           : string;
-  distance        : number;
-  lat             : number;
-  lng             : number;
-  description     ?: string;
-  username        ?: string;
-  startTime       ?: string;
-  endTime         ?: string;
-  image           ?: string;
 
-}
+// export interface ISale{
+//   title           : string;
+//   distance        : number;
+//   lat             : number;
+//   lng             : number;
+//   description     ?: string;
+//   username        ?: string;
+//   startTime       ?: string;
+//   endTime         ?: string;
+//   image           ?: string;
+
+// }
 const URL_FIND_SALES = "https://talaltahir.com/local-messages-api/find-sales.php";
 
 
@@ -24,7 +27,7 @@ export class SalesServiceProvider {
     console.log('Hello SalesServiceProvider Provider');
   }
 
-  getSales(location: {lat: number, lng:number}, milesToSearch: number ){
+  getSales(location: {lat: number, lng:number}, milesToSearch: number ) : Observable<any>{
     let postData = JSON.stringify
       (
         {
@@ -37,9 +40,9 @@ export class SalesServiceProvider {
     return this.http.post(URL_FIND_SALES, postData);
   }
 
-  getSalesCallBack(data, username){
+  getSalesCallBack(data, username) : {sales: ISale[], usersale: ISale[]}{
     let closestSales;
-    let sales = [];
+    let sales: ISale[] = [];
     let usersale: ISale[] = []
 
     try {
@@ -53,12 +56,12 @@ export class SalesServiceProvider {
     for (let i in closestSales) {
       let d = Number(closestSales[i].distance).toFixed(2);
       console.log("USERNAME INSIDE OF SERVCE THAT IS PASSED: " + username)
-      console.log("closestSales[i].username: " + closestSales[i].username)
-      if(closestSales[i].username == username ){
+      console.log("closestSales[i].owner: " + closestSales[i].owner)
+      if(closestSales[i].owner == username ){
         console.log("THEY ARE EQUAL!")
-        usersale.push({ title: closestSales[i].title, distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });
+        usersale.push({ owner: closestSales[i].owner, title: closestSales[i].title, distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });
       }else{
-        sales.push({ title: closestSales[i].title, distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });
+        sales.push({ owner: closestSales[i].owner, title: closestSales[i].title, distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });
       }
       
     }

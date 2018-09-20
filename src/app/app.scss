@@ -14,3 +14,41 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans|Gamja+Flower|Merriweather|Oxygen|Quicksand|Ruslan+Display');
+
+.btnCustom{
+    padding: 30px;
+    margin: 0 0 5px 0
+}
+
+.slideText{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+}
+
+.font-quicksand{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+
+}
+
+.align-text-middle {
+    display: flex;
+    align-items: center;
+}
+
+.primaryCustom-backgroundColor{
+    background-color: color($colors, primaryCustom, base);
+}
+
+.card-content{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    background-color: color($colors, light, base);
+    color: black;
+}
+
+.white{
+    color: white;
+}
