@@ -9,12 +9,14 @@
               <ion-icon name="menu" class="icon-menu"></ion-icon>
             </button>
           </ion-col>
-          <ion-col col-10>
+          <ion-col col-8 offset-2>
             <ion-title class="font-quicksand">Whalsesale</ion-title>
           </ion-col>
+
         </ion-row>
       </ion-label>
-      <ion-toggle (click)="toggleFooter()" (tap)="toggleFooter()" color="toggleColor" class="primaryCustom-backgroundColor" [(ngModel)]="pepperoni">
+
+      <ion-toggle  (ngModelChange)="toggleFooter()" color="toggleColor" class="primaryCustom-backgroundColor" [(ngModel)]="mapListToggle">
       </ion-toggle>
     </ion-item>
   </ion-navbar>
@@ -35,13 +37,13 @@
     </sale-cards>
   </ion-fab>
 
-  <ion-fab bottom left right padding class="font-quicksand" *ngIf="!bDoesUserHaveActiveSale && bLoadAll">
+  <ion-fab bottom left right padding class="font-quicksand" *ngIf="!bDoesUserHaveActiveSale && bLoadAll && !footerState">
     <button class="btnCustom" (click)="openModal()" color="fabbtn" ion-button full round>
       <strong><label>Create Whalesale</label></strong>
     </button>
   </ion-fab>
 
-  <ion-fab bottom left right padding class="font-quicksand" *ngIf="bDoesUserHaveActiveSale && bLoadAll">
+  <ion-fab bottom left right padding class="font-quicksand" *ngIf="bDoesUserHaveActiveSale && bLoadAll && !footerState">
     <button class="btnCustom" (click)="editWhaleSale()" color="fabbtn" ion-button full round>
       <strong><label>Edit My Whalesale&nbsp;</label></strong>
     </button>
@@ -79,30 +81,8 @@
         
                 </ion-row>
               </ion-item>
-        
-          <!-- <ion-item>
-            <ion-avatar item-start>
-              <img src="assets/imgs/yard-sale-pin.gif">
-            </ion-avatar>
-            <h2 class="font-quicksand">{{sale.title}}</h2>
-      
-            <p class="font-quicksand distance">{{sale.distance}} mi.</p>
-          </ion-item> -->
 
         </ion-card>
-        <!-- <ion-card *ngFor="let sale of sales">
-          <ion-item>
-            <ion-avatar item-start>
-              <img src="assets/imgs/yard-sale-pin.gif">
-            </ion-avatar>
-            <h2 class="font-quicksand">{{sale.title}}</h2>
-            <ion-badge item-end>
-              <ion-icon name="car"></ion-icon>
-            </ion-badge>
-            <p class="font-quicksand distance">{{sale.distance}} mi.</p>
-          </ion-item>
-        </ion-card> -->
-
         
             <ion-card *ngFor="let sale of sales; let i = index">
         
@@ -156,6 +136,10 @@
         
         
             </ion-card>
+
+
+   
+ 
  
 
       </ion-list>

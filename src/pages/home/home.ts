@@ -17,6 +17,8 @@ import { EditWhaleSalePage } from '../edit-whale-sale/edit-whale-sale';
 })
 export class HomePage {
 
+  mapListToggle: any;
+
   mapCenter: {lat: number, lng: number}
   sales: ISale[] = [];
   // sales2 : ISale2[] = [];
