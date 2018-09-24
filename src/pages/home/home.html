@@ -28,9 +28,15 @@
 
 <ion-content>
   <map *ngIf="bSalesLoaded || bLocationHasLoaded" [mapCenter]="mapCenter" [sales]="sales" [usersale]="usersale" [loadMarkerSet]="loadMarkerSet"
-    [circleRadius]="circleRadius" (onLoadMapEvent)="onMapReady($event)">
+    [circleRadius]="circleRadius" (onLoadMapEvent)="onMapReady($event)" #map>
   </map>
 
+
+  <ion-fab right bottom style="margin: 0px 0px 100px 0;" *ngIf="bSalesLoaded && bHasMapLoaded != false && bLoadAll && !footerState">
+    <button ion-fab style="background-color: #f4f4f4" (click)="centerMap()">  <ion-icon color="danger" name="pin"></ion-icon>
+    </button>
+  </ion-fab>  
+  
   <ion-fab top left right edge *ngIf="bSalesLoaded && bHasMapLoaded != false && bLoadAll && !footerState">
     <sale-cards [sales]="sales" [usersale]="usersale" [map]="gmap">
 
@@ -58,7 +64,7 @@
       <img *ngIf="sales.length === 0" src="../../assets/imgs/WHALE.png">
 
       <ion-list>
-        <ion-card *ngFor="let sale of usersale" >
+        <ion-card *ngFor="let sale of usersale" (click)="openWhaleSale(sale)">
 
             <ion-item class="card-content">
                 <ion-avatar item-start>
@@ -84,7 +90,7 @@
 
         </ion-card>
         
-            <ion-card *ngFor="let sale of sales; let i = index">
+            <ion-card *ngFor="let sale of sales; let i = index"  (click)="openWhaleSale(sale)">
         
               <ion-item  *ngIf="i%2 !== 0"  class="card-content">
                 <ion-avatar item-start>

@@ -2,7 +2,7 @@
 
 
   <ion-slide *ngFor="let sale of usersale">
-    <ion-card>
+    <ion-card (click)="openWhaleSalePage(sale)">
       <ion-item>
         <ion-avatar item-start>
           <img class="circle-pic" src="../../assets/imgs/yardsale-default.png">
@@ -28,7 +28,7 @@
   </ion-slide>
 
   <ion-slide *ngFor="let sale of sales">
-    <ion-card>
+    <ion-card (click)="openWhaleSalePage(sale)">
 
       <ion-item>
         <ion-avatar item-start>

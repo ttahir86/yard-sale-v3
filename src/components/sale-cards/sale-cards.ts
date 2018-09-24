@@ -1,7 +1,8 @@
 import { MapComponent } from './../map/map';
 import { Component, Input, ViewChild } from '@angular/core';
-import { Slides } from 'ionic-angular';
+import { Slides, ModalController } from 'ionic-angular';
 import { ISale } from '../../providers/sales-service/sales.model'
+import { WhalesalePage } from '../../pages/whalesale/whalesale';
 
 /**
  * Generated class for the SaleCardsComponent component.
@@ -20,7 +21,7 @@ export class SaleCardsComponent{
   @ViewChild(Slides) slides: Slides;
   @Input() map: MapComponent
   
-  constructor() {
+  constructor(private modalCtrl: ModalController) {
     console.log('Hello SaleCardsComponent Component');
   }
 
@@ -53,6 +54,13 @@ export class SaleCardsComponent{
     }
     console.log('after check')
     
+  }
+
+
+  openWhaleSalePage(sale){
+    let modalPage = this.modalCtrl.create(WhalesalePage, {sale: sale});
+
+    modalPage.present();
   }
 
 }

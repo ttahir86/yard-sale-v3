@@ -1,7 +1,7 @@
 import { GoogleMapsAPIWrapper } from '@agm/core';
 import { SalesServiceProvider } from './../../providers/sales-service/sales-service';
 import { ISale } from './../../providers/sales-service/sales.model';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { IonPullUpFooterState } from 'ionic-pullup';
@@ -9,6 +9,8 @@ import { CreateWhaleSalePage } from '../create-whale-sale/create-whale-sale';
 import { Storage } from '@ionic/storage';
 import { IntroSlidePage } from '../intro-slide/intro-slide';
 import { EditWhaleSalePage } from '../edit-whale-sale/edit-whale-sale';
+import { WhalesalePage } from '../whalesale/whalesale';
+import { MapComponent } from '../../components/map/map';
 
 
 @Component({
@@ -16,7 +18,7 @@ import { EditWhaleSalePage } from '../edit-whale-sale/edit-whale-sale';
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  @ViewChild('map') map: MapComponent;
   mapListToggle: any;
 
   mapCenter: {lat: number, lng: number}
@@ -247,6 +249,18 @@ export class HomePage {
   toggleFooter() {
     
     this.footerState = this.footerState == IonPullUpFooterState.Collapsed ? IonPullUpFooterState.Expanded : IonPullUpFooterState.Collapsed;
+  }
+
+
+  openWhaleSale(sale){
+    let modalPage = this.modalCtrl.create(WhalesalePage, {sale: sale});
+
+    modalPage.present();
+  }
+
+  centerMap(){
+    this.map.center({lat: this.user.lat, lng: this.user.lng});
+    console.log(this.map)
   }
 
 

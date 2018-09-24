@@ -77,6 +77,11 @@ export class MapComponent implements OnInit {
       this.gmap.panTo({ lat: sale.lat, lng: sale.lng });
   }
 
+  public center(loc: {lng: number, lat: number}){
+    if (this.gmap)
+      this.gmap.panTo({ lat: loc.lat, lng: loc.lng });
+  }
+
 
 
 }

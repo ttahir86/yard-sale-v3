@@ -29,6 +29,7 @@ import { CreateWhaleSalePage } from '../pages/create-whale-sale/create-whale-sal
 import { IntroSlidePage } from '../pages/intro-slide/intro-slide';
 import { FooterComponent } from '../components/footer/footer';
 import { EditWhaleSalePage } from '../pages/edit-whale-sale/edit-whale-sale';
+import { WhalesalePage } from '../pages/whalesale/whalesale';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { EditWhaleSalePage } from '../pages/edit-whale-sale/edit-whale-sale';
     CreateWhaleSalePage,
     FooterComponent,
     IntroSlidePage,
-    EditWhaleSalePage
+    EditWhaleSalePage,
+    WhalesalePage
     
   ],
   imports: [
@@ -59,7 +61,8 @@ import { EditWhaleSalePage } from '../pages/edit-whale-sale/edit-whale-sale';
     ListPage,
     CreateWhaleSalePage,
     IntroSlidePage,
-    EditWhaleSalePage
+    EditWhaleSalePage,
+    WhalesalePage
     
   ],
   providers: [

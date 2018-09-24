@@ -12,7 +12,7 @@
   
       <ion-buttons end>
         <button ion-button clear (click)="closeModal()">
-          <ion-icon id="close" name="close"></ion-icon>
+          <ion-icon  id="close" name="close"></ion-icon>
         </button>
       </ion-buttons>
   
@@ -23,5 +23,31 @@
 
 
 <ion-content padding>
-
+    <form (ngSubmit)="logForm()">
+        <ion-item>
+          <ion-label>Title</ion-label>
+          <ion-input type="text" [(ngModel)]="form.title" name="title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Description</ion-label>
+          <ion-textarea [(ngModel)]="form.description" name="description"></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label>End Time</ion-label>
+            <ion-datetime #datePicker (ionChange)="onTimePickerChange()" [(ngModel)]="form.endtime" name="endtime" (ionCancel)="myDate=undefined" displayFormat="h:mm A" style="color: #488aff; font-weight: bold;"></ion-datetime>
+          </ion-item>
+        <ion-item no-lines>
+          <ion-label>Add Image</ion-label>
+          <!-- <ion-textarea [(ngModel)]="form.image" name="image"></ion-textarea> -->
+        </ion-item>
+      </form>
 </ion-content>
+
+
+
+<ion-fab bottom left right padding class="font-quicksand">
+    <button class="btnCustom" (click)="logForm()" color="fabbtn" ion-button full round>
+      <strong><label>Save Changes</label></strong>
+    </button>
+  </ion-fab>
+  <footer></footer>

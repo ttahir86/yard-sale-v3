@@ -18,6 +18,7 @@ export class CreateWhaleSalePage {
   selectedRadioButton: any = "Now";
   futureDates: any[] = [];
   selectedDateId: any = false;
+  toastTime: number = 3000;
 
   startTimeModel: any = "4:00";
   endTimeModel: any = "4:00";
@@ -157,7 +158,7 @@ export class CreateWhaleSalePage {
   private presentConfirm() {
     let alert = this.alertCtrl.create({
       title: 'Confirm WhaleSale',
-      message: 'Once your WhaleSale begins, you can stop it at anytime right from the home screen. Each WhaleSale posting will be automatically closed after 24hrs from the start. But don\'t worry, you can start as many you want!',
+      message: 'You can close your Whalesale at any time. All WhaleSale postings will close 24hrs after their start time - But don\'t worry, you can create as many you want!',
       buttons: [
         {
           text: 'Cancel',
@@ -181,15 +182,12 @@ export class CreateWhaleSalePage {
 
 
   private postYardSale() {
-    // this.presentLoadingSpinner();
+
     console.log('start')
 
     if (this.selectedRadioButton === 'Future') {
-      console.log(this.selectedTime);
       this.selectedTime = this.selectedTime + ':00'
-
       let numericalMonth = this.getKeyByValue(this.monthDict, this.futureDates[this.selectedDateId]['month'])
-      console.log(numericalMonth);
       this.selectedDate = this.futureDates[this.selectedDateId]['year'] + "-" + numericalMonth + "-" + this.futureDates[this.selectedDateId]['date'];
     } else {
       let today: any = new Date();
@@ -209,16 +207,12 @@ export class CreateWhaleSalePage {
       min = min < 10 ? '0' + min : min;
       ss = ss < 10 ? '0' + ss : ss;
 
-
-
       this.selectedTime = hh + ":" + min + ":" + ss
 
 
     }
-    console.log(this.selectedDate);
-    console.log(this.selectedTime);
-    var link = 'https://talaltahir.com/local-messages-api/create-whale-sale.php';
 
+    let link = 'https://talaltahir.com/local-messages-api/create-whale-sale.php';
     this.postYardSaleData =
       {
         "lat": this.user.lat,
@@ -228,10 +222,6 @@ export class CreateWhaleSalePage {
         "username": this.user.username,
         "title" : "Whalesale!"
       }
-      console.log('POST DATA FOR CREATE USER: ')
-      console.log(this.user)
-
-
     this.http.post(link, this.postYardSaleData).subscribe(data => {
       try {
         let response = JSON.parse(data["_body"]);
@@ -240,16 +230,12 @@ export class CreateWhaleSalePage {
         this.presentLoadingSpinner();
         setTimeout(() => {
           this.presentToastSuccess();
-        }, 2000);
-
-
+        }, this.toastTime);
         this.closeModal();
       } catch (error) {
         console.log(data);
         console.log(error);
         this.presentToastFailure();
-
-
       }
     }, error => {
       this.presentToastFailure();
@@ -267,14 +253,14 @@ export class CreateWhaleSalePage {
 
     setTimeout(() => {
       spinner.dismiss();
-    }, 3000);
+    }, this.toastTime);
 
   }
   presentToastSuccess() {
     let toast = this.toastCtrl.create({
-      message: 'Your WhaleSale was created successfully!',
-      duration: 3000,
-      position: 'middle'
+      message: 'Your WhaleSale was created successfully! You can now edit your Whalesale by clicking the button at the bottom of your screen.',
+      duration: 5000,
+      position: 'top'
     });
 
     toast.onDidDismiss(() => {
@@ -287,14 +273,12 @@ export class CreateWhaleSalePage {
   presentToastFailure() {
     let toast = this.toastCtrl.create({
       message: 'Something went wrong! Sorry...',
-      duration: 3000,
+      duration: this.toastTime,
       position: 'middle'
     });
-
     toast.onDidDismiss(() => {
       console.log('Dismissed toast');
     });
-
     toast.present();
   }
 
