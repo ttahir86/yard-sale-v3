@@ -27,6 +27,8 @@
 
 
 <ion-content>
+                  <img *ngIf="!bLoadAll" height="100%" style="background-color: transparent; opacity: 0.8" class="circle-pic" src="../../assets/imgs/whaleSpinner.gif">
+
   <map *ngIf="bSalesLoaded || bLocationHasLoaded" [mapCenter]="mapCenter" [sales]="sales" [usersale]="usersale" [loadMarkerSet]="loadMarkerSet"
     [circleRadius]="circleRadius" (onLoadMapEvent)="onMapReady($event)" #map>
   </map>

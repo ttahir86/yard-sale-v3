@@ -1,3 +1,5 @@
+import { WhalesalePage } from './../whalesale/whalesale';
+import { MapComponent } from './../../components/map/map';
 import { GoogleMapsAPIWrapper } from '@agm/core';
 import { SalesServiceProvider } from './../../providers/sales-service/sales-service';
 import { ISale } from './../../providers/sales-service/sales.model';
@@ -9,8 +11,6 @@ import { CreateWhaleSalePage } from '../create-whale-sale/create-whale-sale';
 import { Storage } from '@ionic/storage';
 import { IntroSlidePage } from '../intro-slide/intro-slide';
 import { EditWhaleSalePage } from '../edit-whale-sale/edit-whale-sale';
-import { WhalesalePage } from '../whalesale/whalesale';
-import { MapComponent } from '../../components/map/map';
 
 
 @Component({
@@ -18,7 +18,7 @@ import { MapComponent } from '../../components/map/map';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  @ViewChild('map') map: MapComponent;
+
   mapListToggle: any;
 
   mapCenter: {lat: number, lng: number}
@@ -30,6 +30,7 @@ export class HomePage {
   bHasMapLoaded: boolean = false;
   circleRadius: number; // in miles
   gmap: GoogleMapsAPIWrapper;
+  @ViewChild('map') map: MapComponent;
 
   allSales : {usersale: ISale[], sales: ISale[]};
 
@@ -66,10 +67,14 @@ export class HomePage {
 
 
 
+    this.start();
 
-
-    this.getUserLocation()
+    
     this.circleRadius = 6;
+
+  }
+
+  start(){
     this.login();
   }
 
@@ -107,7 +112,7 @@ export class HomePage {
 
   editWhaleSale(){
     console.log(this.user)
-    let modalPage = this.modalCtrl.create(EditWhaleSalePage);
+    let modalPage = this.modalCtrl.create(EditWhaleSalePage, {user: this.user});
     modalPage.present();
   }
 
@@ -123,6 +128,8 @@ export class HomePage {
         this.username = name;
         this.user.username = name;
         this.bFindUserNameCheck = true;
+
+        this.getUserLocation()
       }
 
       console.log(this.username);
@@ -140,6 +147,8 @@ export class HomePage {
           this.bFindUserNameCheck = true;
           this.user.username = username;
         }
+
+        this.getUserLocation()
         
       } catch (error) {
         console.log(error);
@@ -251,16 +260,16 @@ export class HomePage {
     this.footerState = this.footerState == IonPullUpFooterState.Collapsed ? IonPullUpFooterState.Expanded : IonPullUpFooterState.Collapsed;
   }
 
-
-  openWhaleSale(sale){
-    let modalPage = this.modalCtrl.create(WhalesalePage, {sale: sale});
-
-    modalPage.present();
+  centerMap(){
+    this.map.center({lat: this.user.lat, lng: this.user.lng})
   }
 
-  centerMap(){
-    this.map.center({lat: this.user.lat, lng: this.user.lng});
-    console.log(this.map)
+  openWhaleSale(sale: ISale){
+
+      let modalPage = this.modalCtrl.create(WhalesalePage, { sale: sale });
+
+      modalPage.present();
+    
   }
 
 
