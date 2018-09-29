@@ -1,22 +1,25 @@
 <!-- home header -->
-<ion-header>
+<ion-header >
   <ion-navbar color="primaryCustom" text-center >
     <ion-item class="primaryCustom-backgroundColor" no-lines>
       <ion-label>
         <ion-row>
-          <ion-col col-2>
-            <button item-start ion-button menuToggle>
+          <ion-col col-2 >
+            <button item-start ion-button menuToggle >
               <ion-icon name="menu" class="icon-menu"></ion-icon>
             </button>
           </ion-col>
-          <ion-col col-8 offset-2>
+          <ion-col *ngIf="bLoadAll" col-8 offset-2 >
             <ion-title class="font-quicksand">Whalsesale</ion-title>
+          </ion-col>
+          <ion-col *ngIf="!bLoadAll" col-9 offset-1>
+            <ion-title class="font-quicksand">Loading Whalesales...</ion-title>
           </ion-col>
 
         </ion-row>
       </ion-label>
 
-      <ion-toggle  (ngModelChange)="toggleFooter()" color="toggleColor" class="primaryCustom-backgroundColor" [(ngModel)]="mapListToggle">
+      <ion-toggle *ngIf="bLoadAll" (ngModelChange)="toggleFooter()" color="toggleColor" class="primaryCustom-backgroundColor" [(ngModel)]="mapListToggle">
       </ion-toggle>
     </ion-item>
   </ion-navbar>
@@ -26,9 +29,14 @@
 
 
 
-<ion-content>
-                  <img *ngIf="!bLoadAll" height="100%" style="background-color: transparent; opacity: 0.8" class="circle-pic" src="../../assets/imgs/whaleSpinner.gif">
-
+<ion-content >
+                  <div *ngIf="!bLoadAll" >
+                    <ion-item no-lines>
+                    <div text-center><img src="../../assets/imgs/loadingSpinner.gif"></div>
+                    </ion-item><br/>
+                    <div><img src="../../assets/imgs/whalesale.png"></div>
+                  
+                  </div>
   <map *ngIf="bSalesLoaded || bLocationHasLoaded" [mapCenter]="mapCenter" [sales]="sales" [usersale]="usersale" [loadMarkerSet]="loadMarkerSet"
     [circleRadius]="circleRadius" (onLoadMapEvent)="onMapReady($event)" #map>
   </map>

@@ -30,7 +30,7 @@ export class CreateWhaleSalePage {
   user: { lat: string, lng: string, username: string } = { lat: '', lng: '', username: '' };
   selectedTime: any;
   selectedDate: any;
-  postYardSaleData: any;
+  postYardSaleDataObj: any;
 
   monthDict: {} =
     {
@@ -118,8 +118,10 @@ export class CreateWhaleSalePage {
 
 
   private closeModal() {
-    this.postYardSale['distance'] = 0.0;
-    this.viewCtrl.dismiss(this.postYardSaleData);
+    this.postYardSaleDataObj['distance'] = 0.0;
+    console.log('POST YARD SALE DATA: ')
+    console.log(this.postYardSaleDataObj);
+    this.viewCtrl.dismiss(this.postYardSaleDataObj);
   }
 
 
@@ -213,16 +215,17 @@ export class CreateWhaleSalePage {
     }
 
     let link = 'https://talaltahir.com/local-messages-api/create-whale-sale.php';
-    this.postYardSaleData =
+    this.postYardSaleDataObj =
       {
         "lat": this.user.lat,
         "lng": this.user.lng,
         "startDate": this.selectedDate,
         "startTime": this.selectedTime,
         "username": this.user.username,
-        "title" : "Whalesale!"
+        "title" : "Whalesale!",
+        "description" : "Come to my Whalesale!"
       }
-    this.http.post(link, this.postYardSaleData).subscribe(data => {
+    this.http.post(link, this.postYardSaleDataObj).subscribe(data => {
       try {
         let response = JSON.parse(data["_body"]);
         console.log(response);

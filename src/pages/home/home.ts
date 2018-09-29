@@ -66,11 +66,11 @@ export class HomePage {
     
 
 
-
+    this.circleRadius = 6;
     this.start();
 
     
-    this.circleRadius = 6;
+
 
   }
 
@@ -233,6 +233,8 @@ export class HomePage {
         }else{
           this.addPin();
           this.usersale = [returndata];
+          console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ')
+          console.log(this.usersale)
           this.bDoesUserHaveActiveSale = true;
         }
       

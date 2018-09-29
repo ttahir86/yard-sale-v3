@@ -7,6 +7,7 @@ export interface ISale{
     lng: number;
     distance: number;
     date?: Date;
+    startDate?: string,
     time?: {start: Date, time: Date };
     icon?: string;
     title?: string;

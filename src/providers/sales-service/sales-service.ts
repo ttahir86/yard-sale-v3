@@ -59,9 +59,9 @@ export class SalesServiceProvider {
       console.log("closestSales[i].owner: " + closestSales[i].owner)
       if(closestSales[i].owner == username ){
         console.log("THEY ARE EQUAL!")
-        usersale.push({ owner: closestSales[i].owner, title: closestSales[i].title, distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });
+        usersale.push({ owner: closestSales[i].owner, title: closestSales[i].title, description: closestSales[i].description, startDate: closestSales[i].startDate,  distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });
       }else{
-        sales.push({ owner: closestSales[i].owner, title: closestSales[i].title, distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });
+        sales.push({ owner: closestSales[i].owner, title: closestSales[i].title, description: closestSales[i].description, startDate: closestSales[i].startDate, distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });
       }
       
     }

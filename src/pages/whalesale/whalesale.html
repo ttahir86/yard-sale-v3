@@ -24,7 +24,118 @@
   </ion-header>
 
 <ion-content padding  *ngIf="bLoaded == true">
- <ion-label class="font-quicksand">latitude:  {{sale.lat}}</ion-label>
- <ion-label class="font-quicksand">longitude: {{sale.lng}}</ion-label>
+  <!-- Image Slides-->
+
+  <ion-slides (ionSlideDidChange)="slideChanged()" style="height: 150px;" pager>
+
+    <ion-slide *ngFor="let image of images" >
+
+      <div><img [src]="image" ></div>
+
+    </ion-slide>
+
+  </ion-slides>
+
+
+
+
+
+    <ion-row style="margin: 10px 0px;">
+      <ion-col col-5 offset-1 (click)="onThumbnailClick(0)">
+        <ion-thumbnail [style.border]="selectedImageIndex === 0 ? '2px solid #488aff' : '2px solid #e0e0e0'"
+          [style.boxShadow]="selectedImageIndex === 0 ? '5px 5px #7c7c7c' : '5px 5px #e0e0e0'">
+          <img [src]="images[0]">
+        </ion-thumbnail>
+      </ion-col>
+    
+      <ion-col col-5 (click)="onThumbnailClick(1)">
+        <ion-thumbnail [style.border]="selectedImageIndex === 1 ? '2px solid #488aff' : '2px solid #e0e0e0'"
+          [style.boxShadow]="selectedImageIndex === 1 ? '5px 5px #7c7c7c' : '5px 5px #e0e0e0'">
+    
+          <img [src]="images[1]">
+        </ion-thumbnail>
+      </ion-col>
+    
+    </ion-row>
+
+
+
+
+
+
+  <ion-card>
+
+
+    <ion-card-content>
+
+
+<ion-card>
+
+    
+ 
+    
+
+</ion-card>
+
+
+Start Date:
+<ion-card>
+  <ion-card-header text-right>
+    {{sale.startDate}}
+  </ion-card-header>
+</ion-card>
+
+
+
+<!-- 
+          Title:
+          <ion-card>
+            <ion-card-header text-right>
+      
+            {{sale.title}}
+         </ion-card-header>
+          </ion-card> -->
+
+
+<!-- 
+Description:
+  <ion-card>
+    <ion-card-header text-right>
+     {{sale.description}}
+    </ion-card-header>
+  </ion-card> -->
+
+  Distance:
+  <ion-card>
+    <ion-card-header text-right>
+      {{sale.distance}} mi.
+    </ion-card-header>
+  </ion-card>
+
+  Seller:
+  <ion-card>
+    <ion-card-header text-right>
+  
+      <span style="color: #488aff;">{{sale.owner}}</span>
+  
+    </ion-card-header>
+  </ion-card>
+
+
+Description:
+  <ion-card>
+    <ion-card-header text-center>
+  
+<ion-textarea [value]="sale.description" [readonly]="true"></ion-textarea>
+  
+    </ion-card-header>
+  </ion-card>
+    
+  </ion-card-content>
+</ion-card>
+
+
+ <!-- <ion-label class="font-quicksand">latitude:  {{sale.lat}}</ion-label>
+ <ion-label class="font-quicksand">longitude: {{sale.lng}}</ion-label> -->
 
 </ion-content>

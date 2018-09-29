@@ -1,65 +1,85 @@
-
-
 <!-- 
   
   Google maps template with custom bindings.  
 
 -->
-<agm-map 
-  (mapReady)  = "onMapReady($event)" 
-  style       = "width:100%; height: 100%" 
-  [latitude]  = "mapCenter.lat" 
-  [longitude] = "mapCenter.lng"
-  [zoom]      = "11"
-  [streetViewControl]="false" 
-  [zoomControl]="false">
+<!-- <agm-map (mapReady)="onMapReady($event)" style="width:100%; height: 100%" [latitude]="mapCenter.lat" [longitude]="mapCenter.lng"
+  [zoom]="11" [streetViewControl]="false" [zoomControl]="false" [styles]='nightTimeStyles'> -->
+<agm-map (mapReady)="onMapReady($event)" style="width:100%; height: 100%" [latitude]="mapCenter.lat" [longitude]="mapCenter.lng"
+  [zoom]="11" [streetViewControl]="false" [zoomControl]="false" >
 
   <!-- center map on users location-->
   <div *ngIf="loadMarkerSet === true">
-    <agm-marker  *ngFor="let sale of usersale"
-      [latitude]  = "sale.lat" 
-      [longitude] = "sale.lng" 
-      [animation] = "1"
-      [iconUrl]   = "iconuser">
+    <agm-marker *ngFor="let sale of usersale" [latitude]="sale.lat" [longitude]="sale.lng" [animation]="1" [iconUrl]="iconuser">
+      <!-- <agm-info-window [disableAutoPan]="false" style="padding: 0px; margin 0px;">
+        <div (click)="openWhaleSalePage(sale)">
+          <strong style="color: #488aff;">
+            {{sale.title}}
+          </strong>
+        </div>
+        <div (click)="openWhaleSalePage(sale)" style="color: #488aff;">
+          <strong>
+            {{sale.description}}
+          </strong>
+        </div>
+      </agm-info-window> -->
     </agm-marker>
   </div>
 
   <div *ngIf="loadMarkerSet === false">
-    <agm-marker *ngFor="let sale of usersale" 
-    [latitude]="sale.lat" 
-    [longitude]="sale.lng"
-     [animation]="1" 
-     [iconUrl]="iconuser">
+    <agm-marker *ngFor="let sale of usersale" [latitude]="sale.lat" [longitude]="sale.lng" [animation]="1" [iconUrl]="iconuser">
+      <!-- <agm-info-window [disableAutoPan]="false" style="padding: 0px; margin 0px;">
+        <div (click)="openWhaleSalePage(sale)">
+          <strong style="color: #488aff;">
+            {{sale.title}}
+          </strong>
+        </div>
+        <div (click)="openWhaleSalePage(sale)" style="color: #488aff;">
+          <strong>
+            {{sale.description}}
+          </strong>
+        </div>
+      </agm-info-window> -->
     </agm-marker>
   </div>
 
   <!-- this is a hack to update the markers after the map has been painted.-->
   <div *ngIf="loadMarkerSet === true">
-    <agm-marker *ngFor="let sale of sales" 
-      [latitude]  = "sale.lat" 
-      [longitude] = "sale.lng" 
-      [animation] = "2" 
-      [iconUrl]   = "icons">
-      <!-- <agm-info-window [disableAutoPan]="false">
-        <strong>{{sale.distance}}</strong>
+    <agm-marker *ngFor="let sale of sales" [latitude]="sale.lat" [longitude]="sale.lng" [animation]="2" [iconUrl]="icons">
+      <!-- <agm-info-window [disableAutoPan]="false" style="padding: 0px; margin 0px;">
+        <div (click)="openWhaleSalePage(sale)">
+          <strong style="color: #488aff;">
+            {{sale.title}}
+          </strong>
+        </div>
+        <div (click)="openWhaleSalePage(sale)" style="color: #488aff;">
+          <strong>
+            {{sale.description}}
+          </strong>
+        </div>
       </agm-info-window> -->
     </agm-marker>
   </div>
   <div *ngIf="loadMarkerSet != true">
-    <agm-marker *ngFor="let sale of sales" 
-      [latitude]  = "sale.lat" 
-      [longitude] = "sale.lng" 
-      [animation] = "2" 
-      [iconUrl]   = "icons"></agm-marker>
+    <agm-marker *ngFor="let sale of sales" [latitude]="sale.lat" [longitude]="sale.lng" [animation]="2" [iconUrl]="icons"></agm-marker>
+    <!-- <agm-info-window [disableAutoPan]="false" style="padding: 0px; margin 0px;">
+      <div (click)="openWhaleSalePage(sale)">
+        <strong style="color: #488aff;">
+          {{sale.title}}
+        </strong>
+      </div>
+      <div (click)="openWhaleSalePage(sale)" style="color: #488aff;">
+        <strong>
+          {{sale.description}}
+        </strong>
+      </div>
+    </agm-info-window> -->
   </div>
-
-  <agm-circle 
-    [latitude]        = "mapCenter.lat" 
-    [longitude]       = "mapCenter.lng" 
-    [circleDraggable] = "false" 
-    [editable]        = "false" 
-    [fillColor]       = "'#c2d5f9'"
-    [radius]          = "radius">
+  <!-- previous fill color '#c2d5f9'
+  lightCustom '#FDF5BF'
+softPurple #FFD5FF-->
+  <agm-circle [latitude]="mapCenter.lat" [longitude]="mapCenter.lng" [circleDraggable]="false" [editable]="false"
+    [fillColor]="'#c2d3f9'" [radius]="radius">
   </agm-circle>
 
 </agm-map>
