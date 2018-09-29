@@ -1,3 +1,4 @@
+import { ISale } from './../../providers/sales-service/sales.model';
 import { Http } from '@angular/http';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController, ToastController } from 'ionic-angular';
@@ -18,6 +19,7 @@ export class EditWhaleSalePage {
   form:any ={title: '', description: '', image: '', endtime: ''}
   toastTime : number = 2000;
   username: string = 'anon';
+  usersale: ISale = {owner : '', title : '', description: '', startDate: '', lat: 0, lng: 0, distance: 0};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,
   private loadingCtrl: LoadingController, private toastCtrl: ToastController, private http: Http) {
@@ -26,7 +28,11 @@ export class EditWhaleSalePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad EditWhaleSalePage');
     console.log(this.navParams.get('user'));
-    this.username = this.navParams.get('user').username
+    this.usersale = this.navParams.get('user');
+    this.username = this.navParams.get('user').owner;
+    this.form.title = this.usersale.title;
+    this.form.description = this.usersale.description;
+    this.form.startDate = this.usersale.startDate;
 
   }
   private closeModal() {

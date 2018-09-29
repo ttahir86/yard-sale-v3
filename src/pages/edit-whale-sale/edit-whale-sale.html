@@ -26,24 +26,33 @@
   <form (ngSubmit)="logForm()">
     <ion-item>
       <ion-label>Title</ion-label>
-      <ion-input type="text" [(ngModel)]="form.title" name="title"></ion-input>
+      <ion-input type="text" [(ngModel)]="form.title" name="title" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Description</ion-label>
       <ion-textarea [(ngModel)]="form.description" name="description"></ion-textarea>
     </ion-item>
+
     <ion-item>
-      <ion-label>End Time</ion-label>
+      <ion-label>Start Date</ion-label>
+      <ion-input type="text" [(ngModel)]="form.startDate" name="startDate" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Start Time</ion-label>
       <ion-datetime #datePicker (ionChange)="onTimePickerChange()" [(ngModel)]="form.endtime" name="endtime"
         (ionCancel)="myDate=undefined" displayFormat="h:mm A" style="color: #488aff; font-weight: bold;"></ion-datetime>
     </ion-item>
-    <ion-item no-lines>
-      <ion-label>Add Image</ion-label>
-      <!-- <ion-textarea [(ngModel)]="form.image" name="image"></ion-textarea> -->
+
+    <ion-item>
+      <ion-label>End Time</ion-label>
+      <ion-datetime #datePicker (ionChange)="onTimePickerChange()" [(ngModel)]="form.endtime" name="endtime" (ionCancel)="myDate=undefined"
+        displayFormat="h:mm A" style="color: #488aff; font-weight: bold;"></ion-datetime>
     </ion-item>
+
   </form>
   <ion-item>
-    <button color="light" ion-button small (click)="closeSale()">Close Whalesale</button>
+  
+    <button  ion-button full color="light" (click)="closeSale()">End Whalesale</button>
   </ion-item>
 
 </ion-content>

@@ -11,7 +11,7 @@
   <!-- center map on users location-->
   <div *ngIf="loadMarkerSet === true">
     <agm-marker *ngFor="let sale of usersale" [latitude]="sale.lat" [longitude]="sale.lng" [animation]="1" [iconUrl]="iconuser">
-      <!-- <agm-info-window [disableAutoPan]="false" style="padding: 0px; margin 0px;">
+      <agm-info-window [disableAutoPan]="false" style="padding: 0px; margin 0px;">
         <div (click)="openWhaleSalePage(sale)">
           <strong style="color: #488aff;">
             {{sale.title}}
@@ -22,13 +22,13 @@
             {{sale.description}}
           </strong>
         </div>
-      </agm-info-window> -->
+      </agm-info-window>
     </agm-marker>
   </div>
 
   <div *ngIf="loadMarkerSet === false">
     <agm-marker *ngFor="let sale of usersale" [latitude]="sale.lat" [longitude]="sale.lng" [animation]="1" [iconUrl]="iconuser">
-      <!-- <agm-info-window [disableAutoPan]="false" style="padding: 0px; margin 0px;">
+      <agm-info-window [disableAutoPan]="false" style="padding: 0px; margin 0px;">
         <div (click)="openWhaleSalePage(sale)">
           <strong style="color: #488aff;">
             {{sale.title}}
@@ -39,7 +39,7 @@
             {{sale.description}}
           </strong>
         </div>
-      </agm-info-window> -->
+      </agm-info-window>
     </agm-marker>
   </div>
 

@@ -112,7 +112,7 @@ export class HomePage {
 
   editWhaleSale(){
     console.log(this.user)
-    let modalPage = this.modalCtrl.create(EditWhaleSalePage, {user: this.user});
+    let modalPage = this.modalCtrl.create(EditWhaleSalePage, {user: this.usersale[0]});
     modalPage.present();
   }
 

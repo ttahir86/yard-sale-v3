@@ -320,7 +320,7 @@ export class MapComponent implements OnInit {
   ];
 
   @Input() mapCenter: {lat: number, lng: number};
-  @Input() sales: {title: string, distance: number, lat: number, lng: number}[];
+  @Input() sales: ISale[];
   @Input() usersale: ISale[] = [{owner: '', title: '', description: '', distance: 0.0, lat: 0, lng: 0}];
   @Input() circleRadius: number;
   @Input() loadMarkerSet: boolean;
