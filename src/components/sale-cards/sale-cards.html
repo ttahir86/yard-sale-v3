@@ -1,8 +1,8 @@
-<ion-slides (ionSlideDidChange)="slideChanged()">
+<ion-slides (ionSlideDidChange)="slideChanged()" >
 
 
   <ion-slide *ngFor="let sale of usersale">
-    <ion-card (click)="openWhaleSalePage(sale)">
+    <ion-card (click)="openWhaleSalePage(sale)" class="card-shadow-usersale">
       <ion-item>
         <ion-avatar item-start>
           <img class="circle-pic" src="../../assets/imgs/yardsale-default.png">
@@ -19,18 +19,25 @@
           <ion-col>
             <div text-right>
               <span class="text-mileage font-quicksand">{{sale.distance}} mi.</span>
+                          <!-- <span *ngIf="sales.length > 0">
+                            <small>
+                            <ion-icon name="arrow-forward"></ion-icon>
+                            </small>
+                          </span> -->
+
             </div>
           </ion-col>
+          
       
         </ion-row>
       </ion-item>
     </ion-card>
   </ion-slide>
 
-  <ion-slide *ngFor="let sale of sales">
-    <ion-card (click)="openWhaleSalePage(sale)">
+  <ion-slide *ngFor="let sale of sales; let i = index;">
+    <ion-card (click)="openWhaleSalePage(sale)" class="card-shadow">
 
-      <ion-item>
+      <ion-item >
         <ion-avatar item-start>
           <img class="circle-pic" src="../../assets/imgs/yardsale-default.png">
         </ion-avatar>
@@ -46,6 +53,7 @@
           <ion-col>
             <div  text-right>
               <span class="text-mileage font-quicksand">{{sale.distance}} mi.</span>
+              <!-- <span *ngIf="i < sales.length - 1"><small><ion-icon name="arrow-forward"></ion-icon></small></span> -->
             </div>
           </ion-col>
 

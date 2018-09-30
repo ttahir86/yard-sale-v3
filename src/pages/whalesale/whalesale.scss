@@ -1,3 +1,17 @@
 page-whalesale {
+.card-header{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    background-color: color($colors, white, base);
+    color: black;
+}
+.card-content{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: color($colors, light, base);
+    color: black;
+}
+
 
 }

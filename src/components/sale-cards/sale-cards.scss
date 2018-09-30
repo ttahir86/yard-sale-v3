@@ -9,5 +9,19 @@ sale-cards {
     .text-mileage{
         color: #488aff;
     }
+
+    .card-shadow{
+        //dangerCustom 832232
+        // lightCustom FDF5BF
+        border-right: 7px solid #FDF5BF; 
+        // border-bottom: 8px solid #113b7f;
+    }
+
+    .card-shadow-usersale{
+        //dangerCustom 832232
+        // lightCustom FDF5BF
+        border-right: 7px solid #113b7f; 
+        // border-bottom: 8px solid #113b7f;
+    }
    
 }

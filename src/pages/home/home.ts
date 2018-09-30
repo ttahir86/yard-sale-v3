@@ -113,6 +113,27 @@ export class HomePage {
   editWhaleSale(){
     console.log(this.user)
     let modalPage = this.modalCtrl.create(EditWhaleSalePage, {user: this.usersale[0]});
+    modalPage.onDidDismiss(returndata => {
+
+      try {
+        console.log('RETURN DATA FROM EDIT WHALE SALE PAGE: ')
+        console.log(returndata);
+        if (returndata == undefined) {
+          this.addPin();
+          this.usersale = [];
+          console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ')
+          console.log(this.usersale)
+          this.bDoesUserHaveActiveSale = false;
+
+        } else {
+
+        }
+
+
+      } catch (error) {
+        console.log(error)
+      }
+    });
     modalPage.present();
   }
 

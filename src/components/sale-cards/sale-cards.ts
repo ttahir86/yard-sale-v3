@@ -20,6 +20,7 @@ export class SaleCardsComponent{
   @Input() usersale: ISale[] = [];
   @ViewChild(Slides) slides: Slides;
   @Input() map: MapComponent
+  bisLastSlide: boolean = false;
   
   constructor(private modalCtrl: ModalController) {
     console.log('Hello SaleCardsComponent Component');
@@ -53,6 +54,12 @@ export class SaleCardsComponent{
       }
     }
     console.log('after check')
+
+    // if (currentIndex >= this.sales.length - 1){
+    //   this.bisLastSlide = true;
+    // }else{
+    //   this.bisLastSlide = false;
+    // }
     
   }
 

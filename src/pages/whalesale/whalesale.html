@@ -24,9 +24,19 @@
   </ion-header>
 
 <ion-content padding  *ngIf="bLoaded == true">
+
+  <ion-slides style="height: 45%;" pager>
+  
+    <ion-slide *ngFor="let image of images">
+  
+      <div><img [src]="image"></div>
+  
+    </ion-slide>
+  
+  </ion-slides>
   <!-- Image Slides-->
 
-  <ion-slides (ionSlideDidChange)="slideChanged()" style="height: 150px;" pager>
+  <!-- <ion-slides (ionSlideDidChange)="slideChanged()" style="height: 150px;" pager>
 
     <ion-slide *ngFor="let image of images" >
 
@@ -56,7 +66,7 @@
         </ion-thumbnail>
       </ion-col>
     
-    </ion-row>
+    </ion-row> -->
 
 
 
@@ -65,21 +75,16 @@
 
   <ion-card>
 
+<!-- <ion-card-header class="my-card-header">Details</ion-card-header> -->
+    <ion-card-content class="card-content">
 
-    <ion-card-content>
 
 
-<ion-card>
-
-    
- 
-    
-
-</ion-card>
 
 
 Start Date:
 <ion-card>
+
   <ion-card-header text-right>
     {{sale.startDate}}
   </ion-card-header>
@@ -108,22 +113,14 @@ Description:
   Distance:
   <ion-card>
     <ion-card-header text-right>
-      {{sale.distance}} mi.
-    </ion-card-header>
-  </ion-card>
-
-  Seller:
-  <ion-card>
-    <ion-card-header text-right>
-  
-      <span style="color: #488aff;">{{sale.owner}}</span>
-  
+      <span style="color: #488aff">{{sale.distance}} <small> mi. </small></span>
     </ion-card-header>
   </ion-card>
 
 
-Description:
-  <ion-card>
+
+<span *ngIf="sale.description != ''">Description:</span>
+  <ion-card *ngIf="sale.description != ''" >
     <ion-card-header text-center>
   
 <ion-textarea [value]="sale.description" [readonly]="true"></ion-textarea>
@@ -135,7 +132,24 @@ Description:
 </ion-card>
 
 
+
+
+
+
+
+
+
+
+<button class="btnCustom" *ngIf="sale.description != ''" (click)="contactSeller()" color="fabbtn" ion-button full round>
+  <strong><label class="font-quicksand">Contact Seller</label></strong>
+</button>
+
+<ion-fab *ngIf="sale.description == ''" bottom left right padding class="font-quicksand">
+  <button class="btnCustom" (click)="contactSeller()" color="fabbtn" ion-button full round>
+    <strong><label>Contact Seller</label></strong>
+  </button>
+</ion-fab>
  <!-- <ion-label class="font-quicksand">latitude:  {{sale.lat}}</ion-label>
  <ion-label class="font-quicksand">longitude: {{sale.lng}}</ion-label> -->
-
+<footer *ngIf="sale.description == ''"></footer>
 </ion-content>

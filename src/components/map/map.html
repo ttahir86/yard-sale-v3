@@ -46,18 +46,14 @@
   <!-- this is a hack to update the markers after the map has been painted.-->
   <div *ngIf="loadMarkerSet === true">
     <agm-marker *ngFor="let sale of sales" [latitude]="sale.lat" [longitude]="sale.lng" [animation]="2" [iconUrl]="icons">
-      <!-- <agm-info-window [disableAutoPan]="false" style="padding: 0px; margin 0px;">
+      <agm-info-window [disableAutoPan]="false" style="padding: 0px; margin 0px;">
         <div (click)="openWhaleSalePage(sale)">
           <strong style="color: #488aff;">
             {{sale.title}}
           </strong>
         </div>
-        <div (click)="openWhaleSalePage(sale)" style="color: #488aff;">
-          <strong>
-            {{sale.description}}
-          </strong>
-        </div>
-      </agm-info-window> -->
+      
+      </agm-info-window>
     </agm-marker>
   </div>
   <div *ngIf="loadMarkerSet != true">
@@ -69,9 +65,7 @@
         </strong>
       </div>
       <div (click)="openWhaleSalePage(sale)" style="color: #488aff;">
-        <strong>
-          {{sale.description}}
-        </strong>
+      
       </div>
     </agm-info-window> -->
   </div>

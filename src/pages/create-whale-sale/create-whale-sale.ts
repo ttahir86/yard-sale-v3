@@ -118,7 +118,10 @@ export class CreateWhaleSalePage {
 
 
   private closeModal() {
-    this.postYardSaleDataObj['distance'] = 0.0;
+    if (this.postYardSaleDataObj != undefined){
+      this.postYardSaleDataObj['distance'] = 0.0;
+      this.postYardSaleDataObj['owner'] = this.user.username
+    }
     console.log('POST YARD SALE DATA: ')
     console.log(this.postYardSaleDataObj);
     this.viewCtrl.dismiss(this.postYardSaleDataObj);

@@ -38,6 +38,10 @@ export class WhalesalePage {
     this.viewCtrl.dismiss();
   }
 
+  contactSeller(){
+    
+  }
+
   onThumbnailClick(selectedImageIndex: number){
     console.log("thumbnail click" + selectedImageIndex)
     this.selectedImageIndex = selectedImageIndex;
