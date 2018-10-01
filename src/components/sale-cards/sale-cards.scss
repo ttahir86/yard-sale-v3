@@ -13,14 +13,38 @@ sale-cards {
     .card-shadow{
         //dangerCustom 832232
         // lightCustom FDF5BF
-        border-right: 7px solid #FDF5BF; 
+        border-right: 10px solid #FDF5BF; 
+        border-left: 10px solid #FDF5BF; 
         // border-bottom: 8px solid #113b7f;
     }
 
     .card-shadow-usersale{
         //dangerCustom 832232
         // lightCustom FDF5BF
-        border-right: 7px solid #113b7f; 
+        border-right: 10px solid #113b7f; 
+        // border-left: 10px solid #113b7f; 
+        // border-bottom: 8px solid #113b7f;
+    }
+
+    .card-shadow-usersale-nosales{
+        border-right: 10px solid #113b7f; 
+        border-left: 10px solid #113b7f; 
+    }
+
+
+    .card-shadow-lastcard{
+        //dangerCustom 832232
+        // lightCustom FDF5BF
+        border-left: 10px solid #FDF5BF; 
+        // border-left: 10px solid #113b7f; 
+        // border-bottom: 8px solid #113b7f;
+    }
+
+    .card-shadow-firstcard{
+        //dangerCustom 832232
+        // lightCustom FDF5BF
+        border-right: 10px solid #FDF5BF; 
+        // border-left: 10px solid #113b7f; 
         // border-bottom: 8px solid #113b7f;
     }
    

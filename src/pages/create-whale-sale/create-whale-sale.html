@@ -42,6 +42,8 @@
               </ion-item>
             </ion-col>
 
+
+
             <ion-col>
               <ion-item>
                 <ion-label color="black" [style.font-weight]="selectedRadioButton === 'Future' ? 'bold' : 'normal'">
@@ -53,8 +55,16 @@
 
 
 
+
         </ion-card>
       </div>
+<!-- 
+      
+      <ion-row *ngIf="selectedRadioButton === 'Now'">
+          <ion-item>
+          <img src="../../assets/imgs/whalesale.png">
+        </ion-item>
+        </ion-row> -->
 
       <!-- date picker -->
       <div *ngIf="selectedRadioButton==='Future'" class="question-header">
@@ -91,7 +101,7 @@
               <ion-item>
                 <ion-label color="black">Start Time</ion-label>
                 <ion-datetime #datePicker (ionChange)="onTimePickerChange()" [(ngModel)]="selectedTime" (ionCancel)="myDate=undefined" displayFormat="h:mm A"
-                  [(ngModel)]="startTimeModel" style="color: #488aff; font-weight: bold;"></ion-datetime>
+                minuteValues="0,15,30,45" [(ngModel)]="startTimeModel" style="color: #488aff; font-weight: bold;"></ion-datetime>
               </ion-item>
             </ion-col>
             <!-- <ion-col>

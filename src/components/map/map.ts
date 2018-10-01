@@ -327,6 +327,7 @@ export class MapComponent implements OnInit {
   @Output() onLoadMapEvent: EventEmitter<any> = new EventEmitter<any>();
   gmap: GoogleMapsAPIWrapper;
   radius: number;
+  zoom : number = 11;
   icons: any =
     
       {  
@@ -383,8 +384,11 @@ export class MapComponent implements OnInit {
   }
 
   public center(loc: {lng: number, lat: number}){
-    if (this.gmap)
+    if (this.gmap){
       this.gmap.panTo({ lat: loc.lat, lng: loc.lng });
+      this.gmap.setZoom(this.zoom );
+      this.zoom = 11;
+    }
   }
 
   openWhaleSalePage(sale: ISale){

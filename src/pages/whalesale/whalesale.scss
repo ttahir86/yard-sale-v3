@@ -14,4 +14,24 @@ page-whalesale {
 }
 
 
+.status-closed{
+    color: color($colors, dangerCustom, base);; 
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.status-open{
+    color: color($colors, green, base);; 
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+.my-card-header{
+
+    background-color: color($colors, light, base);
+ 
+}
+
+
 }

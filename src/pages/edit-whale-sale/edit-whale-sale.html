@@ -22,7 +22,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="font-quicksand">
   <form (ngSubmit)="logForm()">
     <ion-item>
       <ion-label>Title</ion-label>
@@ -39,15 +39,20 @@
     </ion-item>
     <ion-item>
       <ion-label>Start Time</ion-label>
-      <ion-datetime #datePicker (ionChange)="onTimePickerChange()" [(ngModel)]="form.endtime" name="endtime"
-        (ionCancel)="myDate=undefined" displayFormat="h:mm A" style="color: #488aff; font-weight: bold;"></ion-datetime>
-    </ion-item>
+      <ion-datetime  (ionChange)="onTimePickerChange()" [(ngModel)]="form.startTime" name="startTime"
+        (ionCancel)="myDate=undefined"  minuteValues="0,15,30,45" displayFormat="h:mm A" style="color: #488aff; font-weight: bold;"></ion-datetime>
+      </ion-item>
 
     <ion-item>
       <ion-label>End Time</ion-label>
-      <ion-datetime #datePicker (ionChange)="onTimePickerChange()" [(ngModel)]="form.endtime" name="endtime" (ionCancel)="myDate=undefined"
-        displayFormat="h:mm A" style="color: #488aff; font-weight: bold;"></ion-datetime>
+      <ion-datetime #endTime (ionChange)="onTimePickerChange()" [(ngModel)]="form.endTime" name="endTime" 
+      minuteValues="0,15,30,45" displayFormat="h:mm A" style="color: #488aff; font-weight: bold;"></ion-datetime>
     </ion-item>
+
+    <ion-item *ngIf="bDisableSaveButton">
+        <ion-label color="danger" class="font-quicksand">start time must be before the end time!</ion-label>
+      
+      </ion-item>
 
   </form>
   <ion-item>
@@ -63,8 +68,13 @@
 
 
 <ion-fab bottom left right padding class="font-quicksand">
-  <button class="btnCustom" (click)="logForm()" color="fabbtn" ion-button full round>
-    <strong><label>Save Changes</label></strong>
+  <button style="opacity: 1" [disabled]="bDisableSaveButton" class="btnCustom" (click)="logForm()" 
+  [style.backgroundColor]="!bDisableSaveButton ? '#113b7f' : '#f4f4f4'" 
+
+  ion-button full round>
+    <strong><label   [style.color]="!bDisableSaveButton ? '#ffffff' : '#000000'">Save Changes</label></strong>
   </button>
 </ion-fab>
 <footer></footer>
+
+

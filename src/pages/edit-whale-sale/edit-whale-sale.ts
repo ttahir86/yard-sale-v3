@@ -1,6 +1,6 @@
 import { ISale } from './../../providers/sales-service/sales.model';
 import { Http } from '@angular/http';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController, ToastController } from 'ionic-angular';
 
 /**
@@ -16,10 +16,14 @@ import { NavController, NavParams, ViewController, LoadingController, ToastContr
 })
 export class EditWhaleSalePage {
 
-  form:any ={title: '', description: '', image: '', endtime: ''}
+  form:any ={title: '', description: '', image: ''}
   toastTime : number = 2000;
   username: string = 'anon';
   usersale: ISale = {owner : '', title : '', description: '', startDate: '', lat: 0, lng: 0, distance: 0};
+  bDisableSaveButton : boolean = false;
+
+  exitType = {'cancel': 0, 'end' : 1, 'save' : 2}
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,
   private loadingCtrl: LoadingController, private toastCtrl: ToastController, private http: Http) {
@@ -34,21 +38,30 @@ export class EditWhaleSalePage {
     this.form.description = this.usersale.description;
     this.form.startDate = this.usersale.startDate;
 
+
   }
-  private closeModal() {
-    this.viewCtrl.dismiss();
+  private closeModal(exitType = this.exitType.cancel) {
+    this.viewCtrl.dismiss(exitType);
   }
 
   logForm(){
     console.log(this.form);
-    this.closeModal();
+    this.closeModal(this.exitType.save);
 
     this.presentLoadingSpinner();
     
   }
 
   onTimePickerChange(){
-    
+    console.log(this.form.startTime);
+    console.log(this.form.endTime);
+
+    if ( (this.form.startTime != undefined && this.form.endTime != undefined) && (this.form.endTime <= this.form.startTime)){
+      this.bDisableSaveButton = true;
+    }else{
+      this.bDisableSaveButton = false;
+    }
+
   }
 
   closeSale(){
@@ -64,7 +77,7 @@ export class EditWhaleSalePage {
 
         this.presentLoadingSpinner();
 
-        this.closeModal();
+        this.closeModal(this.exitType.end);
       } catch (error) {
         console.log(data);
         console.log(error);

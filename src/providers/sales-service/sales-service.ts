@@ -3,6 +3,8 @@ import { Http } from '../../../node_modules/@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ISale } from './sales.model';
+import { TimeProvider } from '../time/time';
+
 
 
 // export interface ISale{
@@ -23,9 +25,7 @@ const URL_FIND_SALES = "https://talaltahir.com/local-messages-api/find-sales.php
 @Injectable()
 export class SalesServiceProvider {
 
-  constructor(public http: Http) {
-    console.log('Hello SalesServiceProvider Provider');
-  }
+  constructor(public http: Http, private timeService : TimeProvider) {}
 
   getSales(location: {lat: number, lng:number}, milesToSearch: number ) : Observable<any>{
     let postData = JSON.stringify
@@ -51,22 +51,38 @@ export class SalesServiceProvider {
       console.log(error);
       console.log(data);
     }
-    console.log('CLOSESTSALES')
-    console.log(closestSales);
+
     for (let i in closestSales) {
       let d = Number(closestSales[i].distance).toFixed(2);
-      console.log("USERNAME INSIDE OF SERVCE THAT IS PASSED: " + username)
-      console.log("closestSales[i].owner: " + closestSales[i].owner)
       if(closestSales[i].owner == username ){
-        console.log("THEY ARE EQUAL!")
-        usersale.push({ owner: closestSales[i].owner, title: closestSales[i].title, description: closestSales[i].description, startDate: closestSales[i].startDate,  distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });
+        usersale.push({ 
+          owner: closestSales[i].owner, 
+          title: closestSales[i].title, 
+          description: closestSales[i].description, 
+          startDate: closestSales[i].startDate, 
+          startTime: closestSales[i].startTime,
+          displayStartTime: this.timeService.convertTime(closestSales[i].startTime),   
+          distance: Number(d), 
+          lat: Number(closestSales[i].latitude), 
+          lng: Number(closestSales[i].longitude) });
       }else{
-        sales.push({ owner: closestSales[i].owner, title: closestSales[i].title, description: closestSales[i].description, startDate: closestSales[i].startDate, distance: Number(d), lat: Number(closestSales[i].latitude), lng: Number(closestSales[i].longitude) });
+        sales.push({ 
+          owner: closestSales[i].owner, 
+          title: closestSales[i].title, 
+          description: closestSales[i].description, 
+          startDate: closestSales[i].startDate, 
+          startTime: closestSales[i].startTime, 
+          displayStartTime: this.timeService.convertTime(closestSales[i].startTime),
+          distance: Number(d), 
+          lat: Number(closestSales[i].latitude), 
+          lng: Number(closestSales[i].longitude) });
       }
       
     }
     return {sales: sales, usersale: usersale}
   }
+
+
 
 
 }

@@ -30,6 +30,7 @@ import { IntroSlidePage } from '../pages/intro-slide/intro-slide';
 import { FooterComponent } from '../components/footer/footer';
 import { EditWhaleSalePage } from '../pages/edit-whale-sale/edit-whale-sale';
 import { WhalesalePage } from '../pages/whalesale/whalesale';
+import { TimeProvider } from '../providers/time/time';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { WhalesalePage } from '../pages/whalesale/whalesale';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation,
     SalesServiceProvider,
-    UserServiceProvider
+    UserServiceProvider,
+    TimeProvider
   ]
 
 })

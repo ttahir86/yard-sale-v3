@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage, ViewController, AlertController, ToastController, LoadingController } from 'ionic-angular';
 import { Http } from '../../../node_modules/@angular/http';
+import { TimeProvider } from '../../providers/time/time';
 
 /**
  * Generated class for the CreateWhaleSalePage page.
@@ -53,7 +54,8 @@ export class CreateWhaleSalePage {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
-    private http: Http) {
+    private http: Http,
+    private timeService: TimeProvider) {
   }
 
   ionViewDidLoad() {
@@ -121,6 +123,7 @@ export class CreateWhaleSalePage {
     if (this.postYardSaleDataObj != undefined){
       this.postYardSaleDataObj['distance'] = 0.0;
       this.postYardSaleDataObj['owner'] = this.user.username
+      this.postYardSaleDataObj['displayStartTime'] = this.timeService.convertTime(this.postYardSaleDataObj['startTime'])
     }
     console.log('POST YARD SALE DATA: ')
     console.log(this.postYardSaleDataObj);
@@ -226,7 +229,7 @@ export class CreateWhaleSalePage {
         "startTime": this.selectedTime,
         "username": this.user.username,
         "title" : "Whalesale!",
-        "description" : "Come to my Whalesale!"
+        "description" : ""
       }
     this.http.post(link, this.postYardSaleDataObj).subscribe(data => {
       try {

@@ -6,7 +6,7 @@
 <!-- <agm-map (mapReady)="onMapReady($event)" style="width:100%; height: 100%" [latitude]="mapCenter.lat" [longitude]="mapCenter.lng"
   [zoom]="11" [streetViewControl]="false" [zoomControl]="false" [styles]='nightTimeStyles'> -->
 <agm-map (mapReady)="onMapReady($event)" style="width:100%; height: 100%" [latitude]="mapCenter.lat" [longitude]="mapCenter.lng"
-  [zoom]="11" [streetViewControl]="false" [zoomControl]="false" >
+  [zoom]="zoom" [streetViewControl]="false" [zoomControl]="false" >
 
   <!-- center map on users location-->
   <div *ngIf="loadMarkerSet === true">
@@ -15,11 +15,6 @@
         <div (click)="openWhaleSalePage(sale)">
           <strong style="color: #488aff;">
             {{sale.title}}
-          </strong>
-        </div>
-        <div (click)="openWhaleSalePage(sale)" style="color: #488aff;">
-          <strong>
-            {{sale.description}}
           </strong>
         </div>
       </agm-info-window>
@@ -32,11 +27,6 @@
         <div (click)="openWhaleSalePage(sale)">
           <strong style="color: #488aff;">
             {{sale.title}}
-          </strong>
-        </div>
-        <div (click)="openWhaleSalePage(sale)" style="color: #488aff;">
-          <strong>
-            {{sale.description}}
           </strong>
         </div>
       </agm-info-window>

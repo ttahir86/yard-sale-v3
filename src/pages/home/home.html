@@ -31,10 +31,11 @@
 
 <ion-content >
                   <div *ngIf="!bLoadAll" >
-                    <ion-item no-lines>
+                    <!-- <ion-item no-lines>
                     <div text-center><img src="../../assets/imgs/loadingSpinner.gif"></div>
-                    </ion-item><br/>
-                    <div><img src="../../assets/imgs/whalesale.png"></div>
+                    </ion-item><br/> -->
+                    <div><img src="../../assets/imgs/whalesale-sign.png"></div>
+          
                   
                   </div>
   <map *ngIf="bSalesLoaded || bLocationHasLoaded" [mapCenter]="mapCenter" [sales]="sales" [usersale]="usersale" [loadMarkerSet]="loadMarkerSet"

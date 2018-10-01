@@ -2,7 +2,7 @@
 
 
   <ion-slide *ngFor="let sale of usersale">
-    <ion-card (click)="openWhaleSalePage(sale)" class="card-shadow-usersale">
+    <ion-card (click)="openWhaleSalePage(sale)" [ngClass]="{'card-shadow-usersale': sales.length > 0, 'card-shadow-usersale-nosales': sales.length === 0}">
       <ion-item>
         <ion-avatar item-start>
           <img class="circle-pic" src="../../assets/imgs/yardsale-default.png">
@@ -14,7 +14,7 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <small class="font-quicksand">  9:00 am - 5:00 pm</small>
+            <small class="font-quicksand">  {{sale.displayStartTime}} - 5:00 pm</small>
           </ion-col>
           <ion-col>
             <div text-right>
@@ -34,8 +34,9 @@
     </ion-card>
   </ion-slide>
 
-  <ion-slide *ngFor="let sale of sales; let i = index;">
-    <ion-card (click)="openWhaleSalePage(sale)" class="card-shadow">
+  <ion-slide *ngFor="let sale of sales; let i = index;" >
+    <ion-card (click)="openWhaleSalePage(sale)"  [ngClass]=
+    "{'card-shadow-firstcard':i==0 && usersale == undefined,'card-shadow-lastcard':i >= sales.length - 1,'card-shadow':i < sales.length - 1 && usersale != undefined }">
 
       <ion-item >
         <ion-avatar item-start>
@@ -48,11 +49,11 @@
         </ion-row>
         <ion-row >
           <ion-col>
-            <small class="font-quicksand"> 9:00 am - 5:00 pm</small>
+            <small class="font-quicksand"> {{sale.displayStartTime}} - 5:00 pm</small>
           </ion-col>
           <ion-col>
             <div  text-right>
-              <span class="text-mileage font-quicksand">{{sale.distance}} mi.</span>
+              <span class="text-mileage font-quicksand" >{{sale.distance}} mi.</span>
               <!-- <span *ngIf="i < sales.length - 1"><small><ion-icon name="arrow-forward"></ion-icon></small></span> -->
             </div>
           </ion-col>
@@ -67,4 +68,6 @@
 
     </ion-card>
   </ion-slide>
+
+
 </ion-slides>

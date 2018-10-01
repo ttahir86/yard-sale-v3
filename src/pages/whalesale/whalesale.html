@@ -7,33 +7,25 @@
 <ion-header *ngIf="bLoaded == true">
 
 
-    <ion-navbar color="primaryCustom">
-      <ion-title class="font-quicksand">{{sale.title}}</ion-title>
+  <ion-navbar color="primaryCustom">
+    <ion-title class="font-quicksand">({{sale.distance}} mi.) &nbsp;{{sale.title}}</ion-title>
 
 
-  
-      <ion-buttons end>
-        <button ion-button clear (click)="closeModal()">
-          <ion-icon id="close" name="close"></ion-icon>
-        </button>
-      </ion-buttons>
-  
-  
-    </ion-navbar>
-  
-  </ion-header>
 
-<ion-content padding  *ngIf="bLoaded == true">
+    <ion-buttons end>
+      <button ion-button clear (click)="closeModal()">
+        <ion-icon id="close" name="close"></ion-icon>
+      </button>
+    </ion-buttons>
 
-  <ion-slides style="height: 45%;" pager>
-  
-    <ion-slide *ngFor="let image of images">
-  
-      <div><img [src]="image"></div>
-  
-    </ion-slide>
-  
-  </ion-slides>
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding *ngIf="bLoaded == true">
+
+
   <!-- Image Slides-->
 
   <!-- <ion-slides (ionSlideDidChange)="slideChanged()" style="height: 150px;" pager>
@@ -71,28 +63,92 @@
 
 
 
-
-
-  <ion-card>
-
-<!-- <ion-card-header class="my-card-header">Details</ion-card-header> -->
-    <ion-card-content class="card-content">
-
-
-
-
-
-Start Date:
-<ion-card>
-
-  <ion-card-header text-right>
-    {{sale.startDate}}
-  </ion-card-header>
-</ion-card>
-
-
-
 <!-- 
+    <ion-row>
+        
+        <ion-col text-center class="font-quicksand">
+            <span style="font-size:25px">{{sale.title}} </span>
+            <small >({{sale.distance}} mi.)</small>
+
+        </ion-col>
+      </ion-row> -->
+
+
+  <!-- <ion-card-header class="my-card-header">Details</ion-card-header> -->
+  <!-- <ion-card >
+      <ion-card-header class="my-card-header">
+        <ion-row>
+          <ion-col text-left>Directions</ion-col>
+          
+          <ion-col text-center>
+              <span style="color: #488aff">{{sale.title}} </span>
+  
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+    </ion-card> -->
+  <ion-row text-center style="border: 2px solid #e0e0e0; margin: 10px 0px 0px 0px;">
+    <ion-col>
+      <ion-label class="font-quicksand">
+        <ion-icon *ngIf="bIsOpen===true" name="pricetag" color="fabbtn"></ion-icon><span *ngIf="bIsOpen===true" style="color: green;">&nbsp;Open</span>
+        <ion-icon *ngIf="bIsOpen===false" name="alert" style="font-size: 20px;" color="dangerCustom"></ion-icon><span *ngIf="bIsOpen===false"
+          class="status-closed">&nbsp;Closed</span>
+          <!-- <ion-icon *ngIf="bIsOpen===true" name="pricetag" style="font-size: 20px;" color="green"></ion-icon><span *ngIf="bIsOpen===true"
+          class="status-open">&nbsp;Open</span> -->
+        <ion-icon *ngIf="bIsOpen==='opening'" name="build" color="fabbtn"></ion-icon><span *ngIf="bIsOpen==='opening'" >&nbsp;Coming
+          Soon!</span>
+      </ion-label>
+    </ion-col>
+    <ion-col *ngIf="bIsOpen==='opening' || bIsOpen === true ">
+      <ion-label class="font-quicksand">
+        <ion-icon name="calendar" color="fabbtn"></ion-icon>
+        &nbsp;{{sale.startDate}}
+      </ion-label>
+    </ion-col>
+    <ion-col *ngIf="bIsOpen==='opening' ||  bIsOpen === true">
+      <ion-label class="font-quicksand">
+        <ion-icon name="clock" color="fabbtn"></ion-icon>
+        &nbsp;{{sale.displayStartTime}}
+      </ion-label>
+    </ion-col>
+    <!-- <ion-col *ngIf="bIsOpen==='opening' || bIsOpen===true">
+            <ion-label class="font-quicksand">
+              <ion-icon name="car" color="fabbtn"></ion-icon>
+              &nbsp;{{sale.distance}} mi.
+            </ion-label>
+          </ion-col> -->
+  </ion-row>
+
+
+
+
+
+
+
+  <ion-slides style="height: 50%; margin: 10px 0px 0px 0px;" pager >
+
+    <ion-slide *ngFor="let image of images" >
+
+      <div><img [src]="image"></div>
+
+    </ion-slide>
+
+  </ion-slides>
+
+
+
+
+
+  <!-- <ion-card>
+
+        <ion-card-header text-right>
+          
+        </ion-card-header>
+      </ion-card> -->
+
+
+
+  <!-- 
           Title:
           <ion-card>
             <ion-card-header text-right>
@@ -102,7 +158,7 @@ Start Date:
           </ion-card> -->
 
 
-<!-- 
+  <!-- 
 Description:
   <ion-card>
     <ion-card-header text-right>
@@ -110,46 +166,64 @@ Description:
     </ion-card-header>
   </ion-card> -->
 
-  Distance:
-  <ion-card>
-    <ion-card-header text-right>
-      <span style="color: #488aff">{{sale.distance}} <small> mi. </small></span>
+  <ion-item  *ngIf="bIsOpen!==false" no-lines >
+      
+    <ion-label class="font-quicksand" text-wrap><small>
+      <span style="font-size: 15px; font-weight: bold; text-decoration: underline;"><i> seller comments</i></span>:&nbsp;
+        {{sale.description}}
+      </small>
+    </ion-label>
+  </ion-item>
+  <!-- <ion-card>
+    <ion-card-header class="my-card-header">
+      <ion-row>
+        <ion-col text-left>Directions</ion-col>
+        
+        <ion-col text-right>
+            <span style="color: #488aff">{{sale.distance}} <small> mi. </small></span>
+
+        </ion-col>
+      </ion-row>
     </ion-card-header>
-  </ion-card>
+  </ion-card> -->
 
-
-
-<span *ngIf="sale.description != ''">Description:</span>
-  <ion-card *ngIf="sale.description != ''" >
+  <!-- <span *ngIf="sale.description != ''">Description:</span> -->
+  <!-- <ion-card *ngIf="sale.description != ''">
     <ion-card-header text-center>
-  
-<ion-textarea [value]="sale.description" [readonly]="true"></ion-textarea>
-  
+{{sale.description}}
+
     </ion-card-header>
-  </ion-card>
-    
-  </ion-card-content>
-</ion-card>
+  </ion-card> -->
+
+
+  <ion-fab right bottom *ngIf="bIsOpen !==false" >
+      <button ion-fab color="fabbtn"><ion-icon name="arrow-dropleft"></ion-icon></button>
+      <ion-fab-list side="left">
+        <button ion-fab color="primaryCustom"><ion-icon name="text"></ion-icon></button>
+        <button ion-fab color="primaryCustom"><ion-icon name="car"></ion-icon></button>
+      </ion-fab-list>
+    </ion-fab>
+
+<!-- 
+  <ion-fab >
+    <button ion-fab class="btnCustom" *ngIf="bIsOpen!==false" (click)="contactSeller()" color="fabbtn">
+      <ion-icon name="text"></ion-icon>
+    </button>
+  </ion-fab> -->
 
 
 
 
+  <!-- <button class="btnCustom" *ngIf="sale.description != '' && bIsOpen!==false" (click)="contactSeller()" color="fabbtn" ion-button full round>
+    <strong><label class="font-quicksand">Contact Seller</label></strong>
+  </button> -->
 
-
-
-
-
-
-<button class="btnCustom" *ngIf="sale.description != ''" (click)="contactSeller()" color="fabbtn" ion-button full round>
-  <strong><label class="font-quicksand">Contact Seller</label></strong>
-</button>
-
-<ion-fab *ngIf="sale.description == ''" bottom left right padding class="font-quicksand">
-  <button class="btnCustom" (click)="contactSeller()" color="fabbtn" ion-button full round>
-    <strong><label>Contact Seller</label></strong>
-  </button>
-</ion-fab>
- <!-- <ion-label class="font-quicksand">latitude:  {{sale.lat}}</ion-label>
+  <!-- <ion-fab *ngIf="bIsOpen !==false" bottom left right padding class="font-quicksand">
+    <button class="btnCustom" (click)="contactSeller()" color="fabbtn" ion-button full round>
+      <strong><label>Contact Seller</label></strong>
+    </button>
+  </ion-fab> -->
+  <!-- <ion-label class="font-quicksand">latitude:  {{sale.lat}}</ion-label>
  <ion-label class="font-quicksand">longitude: {{sale.lng}}</ion-label> -->
-<footer *ngIf="sale.description == ''"></footer>
+  <!-- <footer *ngIf="bIsOpen !==false"></footer> -->
 </ion-content>

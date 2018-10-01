@@ -118,9 +118,9 @@ export class HomePage {
       try {
         console.log('RETURN DATA FROM EDIT WHALE SALE PAGE: ')
         console.log(returndata);
-        if (returndata == undefined) {
+        if (returndata == 1) {
           this.addPin();
-          this.usersale = [];
+          this.usersale = undefined;
           console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ')
           console.log(this.usersale)
           this.bDoesUserHaveActiveSale = false;
