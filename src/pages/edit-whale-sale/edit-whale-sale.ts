@@ -1,7 +1,7 @@
 import { ISale } from './../../providers/sales-service/sales.model';
 import { Http } from '@angular/http';
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, ViewController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { SalesServiceProvider } from '../../providers/sales-service/sales-service';
 
 /**
@@ -27,7 +27,7 @@ export class EditWhaleSalePage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,
-  private loadingCtrl: LoadingController, private toastCtrl: ToastController, private http: Http, private sales: SalesServiceProvider) {
+  private loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController, private http: Http, private sales: SalesServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -139,6 +139,35 @@ export class EditWhaleSalePage {
 
     toast.present();
   }
+
+
+  private presentConfirm() {
+  
+    let alert = this.alertCtrl.create({
+      title: 'Close Whalesale',
+      message: '<div>Are you sure you want to close your sale?</div>',
+      cssClass: 'alert-close-sale',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Close Sale',
+          handler: () => {
+            console.log('Start clicked');
+            this.closeSale();
+
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
 
 
 }

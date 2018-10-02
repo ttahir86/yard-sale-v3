@@ -223,11 +223,11 @@ Description:
   </ion-card> -->
 
   <ion-fab right bottom *ngIf="bIsOpen !==false" >
-      <button ion-fab color="fabbtn"><ion-icon name="arrow-dropleft"></ion-icon></button>
-      <ion-fab-list side="left">
-        <button ion-fab color="primaryCustom"><ion-icon name="text"></ion-icon></button>
-        <button ion-fab color="primaryCustom"><ion-icon name="car"></ion-icon></button>
-      </ion-fab-list>
+      <button ion-fab color="light"><ion-icon color="fabbtn" name="arrow-dropright"></ion-icon></button>
+    </ion-fab>
+
+    <ion-fab left bottom *ngIf="bIsOpen !==false" >
+      <button ion-fab color="light"><ion-icon color="fabbtn" name="arrow-dropleft"></ion-icon></button>
     </ion-fab>
 
 <!-- 
