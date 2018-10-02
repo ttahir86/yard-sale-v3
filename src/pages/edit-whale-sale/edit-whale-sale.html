@@ -23,42 +23,76 @@
 
 
 <ion-content padding class="font-quicksand">
+
+
   <form (ngSubmit)="logForm()">
-    <ion-item>
+    
       <ion-label>Title</ion-label>
-      <ion-input type="text" [(ngModel)]="form.title" name="title" ></ion-input>
-    </ion-item>
-    <ion-item>
+
+      <ion-card>
+        <ion-card-header color="primary" style="padding: 0px;">
+            <ion-input type="text" [(ngModel)]="form.title" name="title" ></ion-input>
+
+        </ion-card-header>
+
+      </ion-card>
+
+
       <ion-label>Description</ion-label>
+
+      <ion-card>
+          <ion-card-header color="primary">
       <ion-textarea [(ngModel)]="form.description" name="description"></ion-textarea>
-    </ion-item>
+    </ion-card-header>
+  </ion-card>
 
-    <ion-item>
-      <ion-label>Start Date</ion-label>
-      <ion-input type="text" [(ngModel)]="form.startDate" name="startDate" ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Start Time</ion-label>
-      <ion-datetime  (ionChange)="onTimePickerChange()" [(ngModel)]="form.startTime" name="startTime"
+
+      
+  <ion-label>Start Date</ion-label>
+  <ion-card text-right>
+      <ion-card-header style="padding: 0px;" >
+          <ion-input text-right type="text" [disabled]="true" [(ngModel)]="form.startDate" name="startDate" ></ion-input>
+      </ion-card-header>
+</ion-card>
+
+
+
+  
+
+<!-- <ion-label>Start Time</ion-label>
+<ion-card>
+    <ion-card-header text-right>
+        <ion-datetime  (ionChange)="onTimePickerChange()" [(ngModel)]="form.startTime" name="startTime"
         (ionCancel)="myDate=undefined"  minuteValues="0,15,30,45" displayFormat="h:mm A" style="color: #488aff; font-weight: bold;"></ion-datetime>
-      </ion-item>
+    </ion-card-header>
+</ion-card>  -->
 
-    <ion-item>
-      <ion-label>End Time</ion-label>
-      <ion-datetime #endTime (ionChange)="onTimePickerChange()" [(ngModel)]="form.endTime" name="endTime" 
-      minuteValues="0,15,30,45" displayFormat="h:mm A" style="color: #488aff; font-weight: bold;"></ion-datetime>
-    </ion-item>
-
+   
+<!-- 
     <ion-item *ngIf="bDisableSaveButton">
         <ion-label color="danger" class="font-quicksand">start time must be before the end time!</ion-label>
       
-      </ion-item>
+      </ion-item> -->
 
   </form>
-  <ion-item>
+  <ion-label>Add Images</ion-label>
+  <ion-row style="border: 2px solid #eeeeee">
+    <ion-col  text-center style="border-right: 2px solid #eeeeee">
+        <img height="50px" src="../../assets/imgs/addimage.png">
+    </ion-col>
   
-    <button  ion-button full color="light" (click)="closeSale()">End Whalesale</button>
-  </ion-item>
+    <ion-col  text-center>
+        <img height="50px" src="../../assets/imgs/addimage.png">
+    </ion-col>
+  </ion-row>
+  
+
+
+
+  <ion-fab right top>
+      <button ion-fab color="light" (click)="closeSale()"><ion-icon name="trash"></ion-icon></button>
+    </ion-fab>
+
 
 </ion-content>
 

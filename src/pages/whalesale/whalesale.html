@@ -99,7 +99,7 @@
           Soon!</span>
       </ion-label>
     </ion-col>
-    <ion-col *ngIf="bIsOpen==='opening' || bIsOpen === true ">
+    <ion-col *ngIf="bIsOpen==='opening'">
       <ion-label class="font-quicksand">
         <ion-icon name="calendar" color="fabbtn"></ion-icon>
         &nbsp;{{sale.startDate}}
@@ -111,6 +111,12 @@
         &nbsp;{{sale.displayStartTime}}
       </ion-label>
     </ion-col>
+    <ion-col *ngIf="bIsOpen === true ">
+        <ion-label class="font-quicksand">
+          <ion-icon name="car" color="fabbtn"></ion-icon>
+          &nbsp;{{sale.distance}} mi.
+        </ion-label>
+      </ion-col>
     <!-- <ion-col *ngIf="bIsOpen==='opening' || bIsOpen===true">
             <ion-label class="font-quicksand">
               <ion-icon name="car" color="fabbtn"></ion-icon>
@@ -165,15 +171,36 @@ Description:
      {{sale.description}}
     </ion-card-header>
   </ion-card> -->
+<div *ngIf="bIsOpen!==false">
+    <ion-card  *ngIf="sale.description != ''"  style="border-right: 2px solid #e0e0e0;border-bottom: 2px solid #e0e0e0">
+        <ion-card-header text-center>
+            <span style="font-size: 15px; font-weight: bold;"><i>seller comments</i></span>
 
-  <ion-item  *ngIf="bIsOpen!==false" no-lines >
+        </ion-card-header>
+        <ion-card-content style="background-color: white">
+            <span style="font-size: 16px;">{{sale.description}}</span>
+        </ion-card-content>
+      </ion-card>
+
+
+      <ion-card  *ngIf="sale.description != ''"  style="border-right: 2px solid #e0e0e0;border-bottom: 2px solid #e0e0e0">
+          <ion-card-header text-center>
+              <span style="font-size: 15px; font-weight: bold;"><i>message board</i></span>
+  
+          </ion-card-header>
+          <ion-card-content style="background-color: white">
+              <!-- <span style="font-size: 16px;">{{sale.description}}</span> -->
+          </ion-card-content>
+        </ion-card>
+
+        <ion-label class="font-quicksand" text-wrap text-center>
+            <small>
+              <span *ngIf="sale.description == ''"><i>No seller comments yet</i></span>
+            </small>
+          </ion-label>
+      </div>
       
-    <ion-label class="font-quicksand" text-wrap><small>
-      <span style="font-size: 15px; font-weight: bold; text-decoration: underline;"><i> seller comments</i></span>:&nbsp;
-        {{sale.description}}
-      </small>
-    </ion-label>
-  </ion-item>
+
   <!-- <ion-card>
     <ion-card-header class="my-card-header">
       <ion-row>
@@ -194,7 +221,6 @@ Description:
 
     </ion-card-header>
   </ion-card> -->
-
 
   <ion-fab right bottom *ngIf="bIsOpen !==false" >
       <button ion-fab color="fabbtn"><ion-icon name="arrow-dropleft"></ion-icon></button>

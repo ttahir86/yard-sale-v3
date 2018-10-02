@@ -2,6 +2,7 @@ import { ISale } from './../../providers/sales-service/sales.model';
 import { Http } from '@angular/http';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController, ToastController } from 'ionic-angular';
+import { SalesServiceProvider } from '../../providers/sales-service/sales-service';
 
 /**
  * Generated class for the EditWhaleSalePage page.
@@ -26,7 +27,7 @@ export class EditWhaleSalePage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,
-  private loadingCtrl: LoadingController, private toastCtrl: ToastController, private http: Http) {
+  private loadingCtrl: LoadingController, private toastCtrl: ToastController, private http: Http, private sales: SalesServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -37,6 +38,7 @@ export class EditWhaleSalePage {
     this.form.title = this.usersale.title;
     this.form.description = this.usersale.description;
     this.form.startDate = this.usersale.startDate;
+    this.form.startTime = this.usersale.startTime;
 
 
   }
@@ -46,7 +48,21 @@ export class EditWhaleSalePage {
 
   logForm(){
     console.log(this.form);
+    let post = {title: this.form.title, description: this.form.description, owner: this.username}
+    this.sales.editSale(post).subscribe(data => { 
+      try {
+          this.sales.editSaleCallBack(data)
+        
+        
+      } catch (error) {
+        console.log(error);
+      }
+    }, error => {
+      console.log(error);
+    });
     this.closeModal(this.exitType.save);
+
+    
 
     this.presentLoadingSpinner();
     

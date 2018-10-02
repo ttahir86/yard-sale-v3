@@ -20,6 +20,7 @@ import { TimeProvider } from '../time/time';
 
 // }
 const URL_FIND_SALES = "https://talaltahir.com/local-messages-api/find-sales.php";
+const URL_EDIT_SALES = "https://talaltahir.com/local-messages-api/edit-whalesale.php";
 
 
 @Injectable()
@@ -80,6 +81,28 @@ export class SalesServiceProvider {
       
     }
     return {sales: sales, usersale: usersale}
+  }
+
+
+  editSale(data){
+    console.log("editSale")
+    console.log(data)
+    
+
+    let postData = JSON.stringify
+      (
+        {
+          title: data.title,
+          description: data.description,
+          owner: data.owner,
+        }
+      );
+    return this.http.post(URL_EDIT_SALES, postData);
+  }
+
+  editSaleCallBack(data){
+    console.log("EDIT SALE CALLBACK DATA");
+    console.log(data)
   }
 
 
