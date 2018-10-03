@@ -29,10 +29,22 @@ export class SaleCardsComponent implements OnInit {
   ngOnInit() {
     console.log('SALES CARDS ONINIT')
     console.log(this.sales[0].startTime);
-    let temp = new Date(this.sales[0].startTime);
-  
-  
+    this.addDisplayDate();
+  }
 
+  addDisplayDate(){
+    for (let i =0; i <this.sales.length; i++){
+      let sDate = this.sales[i].startDate
+      let aDate = sDate.split('-')
+      this.sales[i]['startDisplayDate'] = aDate[1] + "/" + aDate[2] ;
+    }
+    if(this.usersale != undefined && this.usersale != []){
+      for (let i =0; i <this.usersale.length; i++){
+        let sDate = this.usersale[i].startDate
+        let aDate = sDate.split('-')
+        this.usersale[i]['startDisplayDate'] = aDate[1] + "/" + aDate[2];
+      }
+    }
   }
 
 
@@ -70,6 +82,14 @@ export class SaleCardsComponent implements OnInit {
     //   this.bisLastSlide = false;
     // }
 
+  }
+
+  goToPreviousSlide(){
+    if(this.slides.getActiveIndex() >= this.sales.length - 1){
+
+      this.slides.slidePrev();
+
+    }
   }
 
 

@@ -106,6 +106,43 @@ export class SalesServiceProvider {
   }
 
 
+  isOpen(sale: ISale){
+    let saleStartTime = sale.startTime;
+    let currentDate = new Date();
+    console.log('saleStartTime: ' + saleStartTime)
+    let h = currentDate.getHours(); // => 9
+    let m = currentDate.getMinutes(); // =>  30
+    let s = currentDate.getSeconds();
+    let currentTime = h + ":" + m + ":" + s
+    
+    console.log('currentTime: ' + currentTime)
+    
+    let bIsSaleTimeOpen = false;
+    if (currentTime >= saleStartTime ){
+      console.log('open')
+      bIsSaleTimeOpen = true;
+    }
+
+
+
+
+    let saleDate = sale.startDate;
+
+    console.log("current Date: " + this.timeService.getCurrentFullDate())
+    console.log("sale Date: " + saleDate)
+    var d1 = Date.parse(this.timeService.getCurrentFullDate());
+    var d2 = Date.parse(saleDate);
+    if (d1 === d2 && bIsSaleTimeOpen) {
+        return true;
+    }else if (d1 <= d2){
+      return 'opening';
+    }
+
+    return false;
+
+
+  }
+
 
 
 }

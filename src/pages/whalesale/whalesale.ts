@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { ISale } from '../../providers/sales-service/sales.model';
 import { Slides } from 'ionic-angular';
+import { SalesServiceProvider } from '../../providers/sales-service/sales-service';
 /**
  * Generated class for the WhalesalePage page.
  *
@@ -20,7 +21,7 @@ export class WhalesalePage {
   sale: ISale = {owner :'', title: '', distance: 0, lat: 0, lng: 0, startDate: ''};
   @ViewChild(Slides) slides: Slides;
   bIsOpen: any = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private salesService: SalesServiceProvider, private viewCtrl: ViewController) {}
 
 
   selectedImageIndex: number = 0;
@@ -33,7 +34,7 @@ export class WhalesalePage {
     this.sale = this.navParams.get('sale');
     console.log(this.sale)
     this.bLoaded = true;
-    this.bIsOpen = this.isOpen();
+    this.bIsOpen = this.salesService.isOpen(this.sale);
     console.log('isOpen: ' + this.bIsOpen)
   }
 
@@ -67,55 +68,6 @@ export class WhalesalePage {
     }
   }
 
-  isOpen(){
-    let saleStartTime = this.sale.startTime;
-    let currentDate = new Date();
-    console.log('saleStartTime: ' + saleStartTime)
-    let h = currentDate.getHours(); // => 9
-    let m = currentDate.getMinutes(); // =>  30
-    let s = currentDate.getSeconds();
-    let currentTime = h + ":" + m + ":" + s
-    
-    console.log('currentTime: ' + currentTime)
-    
-    let bIsSaleTimeOpen = false;
-    if (currentTime >= saleStartTime ){
-      console.log('open')
-      bIsSaleTimeOpen = true;
-    }
-
-
-
-
-    let saleDate = this.sale.startDate;
-
-    console.log("current Date: " + this.getCurrentFullDate())
-    console.log("sale Date: " + saleDate)
-    var d1 = Date.parse(this.getCurrentFullDate());
-    var d2 = Date.parse(saleDate);
-    if (d1 === d2 && bIsSaleTimeOpen) {
-        return true;
-    }else if (d1 <= d2){
-      return 'opening';
-    }
-
-    return false;
-
-
-  }
-
-
-  private getCurrentFullDate() {
-    let today: any = new Date();
-    let dd: any = today.getDate();
-    let mm: any = today.getMonth() + 1; //January is 0!
-    let yyyy = today.getFullYear();
-
-    dd = dd < 10 ? '0' + dd : dd;
-    mm = mm < 10 ? '0' + mm : mm;
-
-    today = yyyy + '-' + mm + '-' + dd;
-    return today;
-  }
+  
 
 }

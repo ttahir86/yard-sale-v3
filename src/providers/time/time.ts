@@ -40,4 +40,17 @@ export class TimeProvider {
     
   }
 
+  getCurrentFullDate() {
+    let today: any = new Date();
+    let dd: any = today.getDate();
+    let mm: any = today.getMonth() + 1; //January is 0!
+    let yyyy = today.getFullYear();
+
+    dd = dd < 10 ? '0' + dd : dd;
+    mm = mm < 10 ? '0' + mm : mm;
+
+    today = yyyy + '-' + mm + '-' + dd;
+    return today;
+  }
+
 }

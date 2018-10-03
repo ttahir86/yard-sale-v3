@@ -36,7 +36,12 @@
 
   <ion-slide *ngFor="let sale of sales; let i = index;" >
     <ion-card (click)="openWhaleSalePage(sale)"  [ngClass]=
-    "{'card-shadow-firstcard':i==0 && usersale == undefined,'card-shadow-lastcard':i >= sales.length - 1,'card-shadow':i < sales.length - 1 && usersale != undefined }">
+    "{
+      'card-shadow-firstcard':i==0 && usersale == undefined,
+      'card-shadow-lastcard':i >= sales.length - 1,
+      'card-shadow':i < sales.length - 1 && usersale != undefined,
+      'card-shadow-2':i < sales.length - 1 && usersale === undefined && i !=0 
+    }">
 
       <ion-item >
         <ion-avatar item-start>

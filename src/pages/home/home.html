@@ -49,7 +49,7 @@
   </ion-fab>  
   
   <ion-fab top left right edge *ngIf="bSalesLoaded && bHasMapLoaded != false && bLoadAll && !footerState">
-    <sale-cards [sales]="sales" [usersale]="usersale" [map]="gmap">
+    <sale-cards [sales]="sales" [usersale]="usersale" [map]="gmap" #saleCards>
 
     </sale-cards>
   </ion-fab>

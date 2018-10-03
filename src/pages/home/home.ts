@@ -11,6 +11,7 @@ import { CreateWhaleSalePage } from '../create-whale-sale/create-whale-sale';
 import { Storage } from '@ionic/storage';
 import { IntroSlidePage } from '../intro-slide/intro-slide';
 import { EditWhaleSalePage } from '../edit-whale-sale/edit-whale-sale';
+import { SaleCardsComponent } from '../../components/sale-cards/sale-cards';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class HomePage {
   circleRadius: number; // in miles
   gmap: GoogleMapsAPIWrapper;
   @ViewChild('map') map: MapComponent;
+  @ViewChild('saleCards') saleCards: SaleCardsComponent;
 
   allSales : {usersale: ISale[], sales: ISale[]};
 
@@ -119,11 +121,14 @@ export class HomePage {
         console.log('RETURN DATA FROM EDIT WHALE SALE PAGE: ')
         console.log(returndata);
         if (returndata == 1) {
+          this.saleCards.goToPreviousSlide();
           this.addPin();
           this.usersale = undefined;
           console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ')
           console.log(this.usersale)
           this.bDoesUserHaveActiveSale = false;
+          
+          
 
         } else {
 
