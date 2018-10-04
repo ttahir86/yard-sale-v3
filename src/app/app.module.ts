@@ -18,6 +18,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { IonicStorageModule } from '@ionic/storage';
+import { Camera } from '@ionic-native/camera';
 
 
 import { IonPullupModule } from 'ionic-pullup';
@@ -71,6 +72,7 @@ import { TimeProvider } from '../providers/time/time';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation,
+    Camera,
     SalesServiceProvider,
     UserServiceProvider,
     TimeProvider

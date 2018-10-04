@@ -1,3 +1,4 @@
+import { Camera } from '@ionic-native/camera';
 import { ISale } from './../../providers/sales-service/sales.model';
 import { Http } from '@angular/http';
 import { Component, ViewChild } from '@angular/core';
@@ -22,12 +23,21 @@ export class EditWhaleSalePage {
   username: string = 'anon';
   usersale: ISale = {owner : '', title : '', description: '', startDate: '', lat: 0, lng: 0, distance: 0};
   bDisableSaveButton : boolean = false;
+  public img0: string;
+  public img1: string;
 
   exitType = {'cancel': 0, 'end' : 1, 'save' : 2}
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,
-  private loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController, private http: Http, private sales: SalesServiceProvider) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private viewCtrl: ViewController,
+    private loadingCtrl: LoadingController, 
+    private alertCtrl: AlertController, 
+    private toastCtrl: ToastController, 
+    private http: Http, 
+    private sales: SalesServiceProvider,
+    private camera: Camera) {
   }
 
   ionViewDidLoad() {
@@ -166,6 +176,29 @@ export class EditWhaleSalePage {
       ]
     });
     alert.present();
+  }
+
+
+
+
+  takePicture(imgIndex : number) {
+    console.log("takePicture() start()");
+    console.log("imgIndex: " + imgIndex);
+    this.camera.getPicture({
+      destinationType: this.camera.DestinationType.DATA_URL,
+      targetWidth: 1000,
+      targetHeight: 1000
+    }).then((imageData) => {
+      // imageData is a base64 encoded string
+      if(imgIndex = 0){
+        this.img0 = "data:image/jpeg;base64," + imageData;
+
+      }else{
+        this.img1 = "data:image/jpeg;base64," + imageData;
+      }
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 
