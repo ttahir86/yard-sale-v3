@@ -195,10 +195,15 @@ export class EditWhaleSalePage {
       // imageData is a base64 encoded string
       if(imgIndex == 0){
         this.img0 = "data:image/jpeg;base64," + imageData;
+        alert(imageData)
+        alert(this.img0)
         this.upload(this.img0);
       }else{
         this.img1 = "data:image/jpeg;base64," + imageData;
+        alert(imageData)
+        alert(this.img1)
         this.upload(this.img1)
+        
       }
     }, (err) => {
       console.log(err);
@@ -206,25 +211,29 @@ export class EditWhaleSalePage {
     });
   }
 
-
   upload(localImgPath) {
     console.log('uploading Image...')
-
-    let fileTransfer: FileTransferObject  = this.transfer.create();
+    alert('upload() start')
+    alert('localImgPath: ' + JSON.stringify(localImgPath))
+    let fileTransfer: FileTransferObject = this.transfer.create();
 
     let options: FileUploadOptions = {
       fileKey: 'file',
       fileName: 'img.jpg',
       headers: {}
-  }
+    }
     console.log('file upload')
     fileTransfer.upload(localImgPath, 'https://talaltahir.com/local-messages-api/upload-image.php', options)
       .then((data) => {
         console.log('upload image success')
+        alert('success promise response: ' + JSON.stringify(data))
       }, (err) => {
         console.log('upload image failure')
+        alert('error on promise return: ' + err)
       })
   }
+
+
 
 
 
