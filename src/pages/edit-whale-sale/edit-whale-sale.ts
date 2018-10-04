@@ -1,7 +1,8 @@
+import { FileTransfer, FileUploadOptions, FileTransferObject} from '@ionic-native/file-transfer';
 import { Camera } from '@ionic-native/camera';
 import { ISale } from './../../providers/sales-service/sales.model';
 import { Http } from '@angular/http';
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { SalesServiceProvider } from '../../providers/sales-service/sales-service';
 
@@ -26,7 +27,8 @@ export class EditWhaleSalePage {
   public img0: string = "";
   public img1: string = "";
 
-  exitType = {'cancel': 0, 'end' : 1, 'save' : 2}
+  exitType = {'cancel': 0, 'end' : 1, 'save' : 2};
+
 
 
   constructor(public navCtrl: NavController, 
@@ -37,7 +39,8 @@ export class EditWhaleSalePage {
     private toastCtrl: ToastController, 
     private http: Http, 
     private sales: SalesServiceProvider,
-    private camera: Camera) {
+    private camera: Camera,
+    private transfer: FileTransfer) {
   }
 
   ionViewDidLoad() {
@@ -185,21 +188,44 @@ export class EditWhaleSalePage {
     console.log("takePicture() start()");
     console.log("imgIndex: " + imgIndex);
     this.camera.getPicture({
-      destinationType: this.camera.DestinationType.DATA_URL,
+      destinationType: this.camera.DestinationType.FILE_URI,
       targetWidth: 1000,
       targetHeight: 1000
     }).then((imageData) => {
       // imageData is a base64 encoded string
       if(imgIndex == 0){
         this.img0 = "data:image/jpeg;base64," + imageData;
+        this.upload(this.img0);
       }else{
         this.img1 = "data:image/jpeg;base64," + imageData;
+        this.upload(this.img1)
       }
     }, (err) => {
       console.log(err);
       
     });
   }
+
+
+  upload(localImgPath) {
+    console.log('uploading Image...')
+
+    let fileTransfer: FileTransferObject  = this.transfer.create();
+
+    let options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: 'img.jpg',
+      headers: {}
+  }
+    console.log('file upload')
+    fileTransfer.upload(localImgPath, 'https://talaltahir.com/local-messages-api/upload-image.php', options)
+      .then((data) => {
+        console.log('upload image success')
+      }, (err) => {
+        console.log('upload image failure')
+      })
+  }
+
 
 
 

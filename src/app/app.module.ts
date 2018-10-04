@@ -18,7 +18,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { IonicStorageModule } from '@ionic/storage';
-import { Camera } from '@ionic-native/camera';
+import { Camera} from '@ionic-native/camera';
+
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+
 
 
 import { IonPullupModule } from 'ionic-pullup';
@@ -51,7 +54,7 @@ import { TimeProvider } from '../providers/time/time';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    AgmCoreModule.forRoot({ apiKey: '' }),
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyDZGWzxjVpZN_eSlRXSoh-iVY_6tAp15uk' }),
     IonicStorageModule.forRoot(),
     IonPullupModule
     
@@ -75,7 +78,8 @@ import { TimeProvider } from '../providers/time/time';
     Camera,
     SalesServiceProvider,
     UserServiceProvider,
-    TimeProvider
+    TimeProvider,
+    FileTransfer, FileTransferObject 
   ]
 
 })
