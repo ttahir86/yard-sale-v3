@@ -23,8 +23,8 @@ export class EditWhaleSalePage {
   username: string = 'anon';
   usersale: ISale = {owner : '', title : '', description: '', startDate: '', lat: 0, lng: 0, distance: 0};
   bDisableSaveButton : boolean = false;
-  public img0: string;
-  public img1: string;
+  public img0: string = "";
+  public img1: string = "";
 
   exitType = {'cancel': 0, 'end' : 1, 'save' : 2}
 
@@ -190,14 +190,14 @@ export class EditWhaleSalePage {
       targetHeight: 1000
     }).then((imageData) => {
       // imageData is a base64 encoded string
-      if(imgIndex = 0){
+      if(imgIndex == 0){
         this.img0 = "data:image/jpeg;base64," + imageData;
-
       }else{
         this.img1 = "data:image/jpeg;base64," + imageData;
       }
     }, (err) => {
       console.log(err);
+      
     });
   }
 

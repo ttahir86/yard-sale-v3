@@ -78,12 +78,12 @@
   <ion-label>Add Images</ion-label>
   <ion-row style="border: 2px solid #eeeeee">
     <ion-col  text-center style="border-right: 2px solid #eeeeee">
-        <img (click)="takePicture(0)" height="50px" src="../../assets/imgs/addimage.png" *ngIf="img0 == undefined">
+        <img (click)="takePicture(0)" height="50px" src="../../assets/imgs/addimage.png" *ngIf="img0 == ''">
         <img [src]="img0" *ngIf="img0" />
     </ion-col>
   
     <ion-col  text-center>
-        <img (click)="takePicture(1)" height="50px" src="../../assets/imgs/addimage.png" *ngIf="img0 == undefined">
+        <img (click)="takePicture(1)" height="50px" src="../../assets/imgs/addimage.png" *ngIf="img1 == ''">
         <img [src]="img1" *ngIf="img1" />
     </ion-col>
   </ion-row>
